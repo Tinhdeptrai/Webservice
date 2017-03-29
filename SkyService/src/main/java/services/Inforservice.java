@@ -1,23 +1,28 @@
 package services;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import entity.Information;
+import entity.Partner;
 import entity.RatingCount;
 import entity.Room;
 import entity.Service;
+import soapservice.ArrayOfGROUPROOM;
 import soapservice.ArrayOfHOTELSERVICE;
+import soapservice.GROUPROOM;
 import soapservice.HOTELSERVICE;
+import soapservice.InforHotel;
 import soapservice.WebService;
 import soapservice.WebServiceSoap;
 import utils.MySessionFactory;
@@ -54,7 +59,8 @@ public class Inforservice {
 	public List<Information> searchProvince(int partner, String province) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.province = " + "'" + province + "' and E.partner = " + partner;
+			String str = "from Information E where E.province like " + "'%" + province + "%'" + " and E.partner = "
+					+ partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
 			lst = query.list();
@@ -67,8 +73,8 @@ public class Inforservice {
 	public List<Information> searchDistrictAndProvince(int partner, String province, String distric) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.province = " + "'" + province + "'" + "and E.district = " + "'"
-					+ distric + "'" + "and E.partner = " + partner;
+			String str = "from Information E where E.province = " + "'%" + province + "%'" + "and E.district = " + "'%"
+					+ distric + "%'" + "and E.partner = " + partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
 			lst = query.list();
@@ -81,8 +87,8 @@ public class Inforservice {
 	public List<Information> searchTypeAndProvince(int partner, String province, String type) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.province = " + "'" + province + "'" + "and E.type = " + "'" + type
-					+ "' and E.partner = " + partner;
+			String str = "from Information E where E.province = " + "'%" + province + "%'" + "and E.type = " + "'%"
+					+ type + "%'" + " and E.partner = " + partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
 			lst = query.list();
@@ -96,8 +102,8 @@ public class Inforservice {
 			String type) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.province = " + "'" + province + "'" + "and E.district = " + "'"
-					+ distric + "'" + "and E.type = " + "'" + type + "'" + "and E.partner = " + partner;
+			String str = "from Information E where E.province = " + "'%" + province + "%'" + "and E.district = " + "'%"
+					+ distric + "%'" + "and E.type = " + "'%" + type + "%'" + "and E.partner = " + partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
 			lst = query.list();
@@ -111,7 +117,7 @@ public class Inforservice {
 	public List<Information> searchType(int partner, String type) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.type = " + "'" + type + "'" + "and E.partner = " + partner;
+			String str = "from Information E where E.type = " + "'%" + type + "%'" + "and E.partner = " + partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
 			lst = query.list();
@@ -162,6 +168,7 @@ public class Inforservice {
 
 		try {
 			ObjectMapper mapper = new ObjectMapper();
+
 			result = mapper.writeValueAsString(lst);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -179,31 +186,23 @@ public class Inforservice {
 
 	}
 
-	@SuppressWarnings({ "rawtypes", "unused" })
-	public String rating1() {
-		Map<Integer, Integer> map = new HashMap();
-		String result = null;
-		// List<Rating> lst = new ArrayList<>();
-		try {
-			String str = " select E.information.id  , count(E.information.id) as ratingNo from Rating E Group By E.information.id order by ratingNo DESC";
-			Session session = MySessionFactory.getSessionFactory().openSession();
-			Query query = (Query) session.createQuery(str);
-			// map = (Map<Integer, Integer>) query.list();
-
-			try {
-				ObjectMapper mapper = new ObjectMapper();
-				result = mapper.writeValueAsString(map);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return result;
-
-	}
+	/*
+	 * @SuppressWarnings({ "rawtypes", "unused" }) public String rating1() {
+	 * Map<Integer, Integer> map = new HashMap(); String result = null; //
+	 * List<Rating> lst = new ArrayList<>(); try { String str =
+	 * " select E.information.id  , count(E.information.id) as ratingNo from Rating E Group By E.information.id order by ratingNo DESC"
+	 * ; Session session = MySessionFactory.getSessionFactory().openSession();
+	 * Query query = (Query) session.createQuery(str); // map = (Map<Integer,
+	 * Integer>) query.list();
+	 * 
+	 * try { ObjectMapper mapper = new ObjectMapper(); result =
+	 * mapper.writeValueAsString(map); } catch (IOException e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); }
+	 * 
+	 * } catch (Exception ex) { ex.printStackTrace(); } return result;
+	 * 
+	 * }
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public List<RatingCount> rating() {
@@ -270,7 +269,74 @@ public class Inforservice {
 		}
 		session.getTransaction().commit();
 		System.out.println("them thanh cong");
+	}
 
+	public Date stringToDate(String str) throws ParseException {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+		Date date = formatter.parse(str);
+		return date;
+	}
+
+	public void getPartnerService() throws ParseException {
+
+		WebService webService = new WebService();
+		WebServiceSoap serviceSoap = webService.getWebServiceSoap();
+		ArrayOfGROUPROOM arrayOfGROUPROOM = serviceSoap.getListRoom();
+		List<GROUPROOM> lst = new ArrayList<>();
+		lst = arrayOfGROUPROOM.getGROUPROOM();
+		// System.out.println(lst.get(1).getNAMESERVICE());
+		Information information = new Information();
+		InforHotel hotel = serviceSoap.myName();
+		information.setHotline(hotel.getHotline());
+		information.setName(hotel.getName());
+
+		information.setTimeopen(stringToDate(hotel.getTimeopen()));
+		information.setTimeclose(stringToDate(hotel.getTimeclose()));
+		information.setType(hotel.getType());
+		information.setIntro(hotel.getIntro());
+		information.setNumber(hotel.getNumber());
+		information.setWard(hotel.getWard());
+		information.setStreet(hotel.getStret());
+		information.setDistrict(hotel.getDistrict());
+		information.setProvince(hotel.getProvince());
+		information.setUrlpartner(hotel.getUrlpartner());
+		Partner partne = new Partner();
+		partne.setId(1);
+		information.setPartner(partne);
+
+		Session session = MySessionFactory.getSessionFactory().openSession();
+
+		session.getTransaction().begin();
+		session.saveOrUpdate(information);
+		session.getTransaction().commit();
+
+		for (GROUPROOM grouproom : lst) {
+			Room room = new Room();
+			room.setType(grouproom.getTYPEROOM());
+			room.setPrice(grouproom.getPRICE());
+			room.setQuanlity(grouproom.getQUANTITY());
+			room.setImage(grouproom.getIMAGE());
+			room.setInformation(information);
+			room.setMaxpeople(5);
+			room.setDetail(" ");
+			session.saveOrUpdate(room);
+		}
+		
+
+	}
+
+	public List<Information> lstInfor(int partner) {
+		List<Information> lst = new ArrayList<>();
+		try {
+			String str = "from Information E where E.partner = " + partner;
+			Session session = MySessionFactory.getSessionFactory().openSession();
+			Query query = (Query) session.createQuery(str);
+			lst = query.list();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return lst;
 	}
 
 }

@@ -13,3 +13,4 @@
 0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:19:01 +0700] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-7 0
 0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:19:03 +0700] "GET /SkyService/ HTTP/1.1" 200 2630 http-bio-8080-exec-8 30
 0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:19:25 +0700] "GET /SkyService/rest/infor/search?partner=1&province=Tp.%20H%E1%BB%93%20Ch%C3%AD%20Minh HTTP/1.1" 200 14 http-bio-8080-exec-9 66
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:14:36:29 +0700] "GET /SkyService/rest/infor/search?partner=1&province=Tp.%20H%E1%BB%93%20Ch%C3%AD%20Minh HTTP/1.1" 200 14 http-bio-8080-exec-1 1481

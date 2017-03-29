@@ -1,6 +1,7 @@
 package test;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.Information;
 import entity.Users;
 import services.Inforservice;
 
@@ -34,11 +36,20 @@ public class testloaddata extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//List<Users> lst = new ArrayList<>();
+		//List<Information> lst = new ArrayList<>();
 		Inforservice inforservice = new Inforservice();
-		 
+		//lst =	inforservice.lstInfor(1);
+		
+		//System.out.println(" danh sach ne " + lst.get(0).getName());
+		try {
+			inforservice.getPartnerService();
+			System.out.println("thanh cong");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//response.getWriter().write(inforservice.rating().size());
-		System.out.println(" danh sach ne " + inforservice.rating().get(1).getId());
+		//System.out.println(" danh sach ne " + inforservice.rating().get(1).getId());
 //		try {
 //			
 //			
@@ -47,7 +58,7 @@ public class testloaddata extends HttpServlet {
 //			ex.printStackTrace();
 //			System.out.println("vao loi nha !");
 //		}
-		inforservice.getService();
+		//inforservice.getService();
 		
 	}
 

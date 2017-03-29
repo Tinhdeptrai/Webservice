@@ -1,5 +1,6 @@
 package test;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,30 +18,38 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		
-		SessionFactory factory = MySessionFactory.getSessionFactory();
-		Session session = factory.getCurrentSession();
-		List<Information> lst = new ArrayList<>();
-		
-		try {
-			session.getTransaction().begin();
-			
-			System.out.println(session + "o test");
 
-			Inforservice inforservice = new Inforservice();
-			// lst = inforservice.searchProvince("HCM");
-			 for (Information information : lst) {
-				 System.out.println(information.getName());
-				
-			}
-			 System.out.println("tim theo tinh "+ lst.get(0).getName());
-			
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			session.getTransaction().rollback();
+		/*
+		 * SessionFactory factory = MySessionFactory.getSessionFactory();
+		 * Session session = factory.getCurrentSession(); List<Information> lst
+		 * = new ArrayList<>();
+		 * 
+		 * try { session.getTransaction().begin();
+		 * 
+		 * System.out.println(session + "o test");
+		 * 
+		 * Inforservice inforservice = new Inforservice(); // lst =
+		 * inforservice.searchProvince("HCM"); for (Information information :
+		 * lst) { System.out.println(information.getName());
+		 * 
+		 * } System.out.println("tim theo tinh "+ lst.get(0).getName());
+		 * 
+		 * session.getTransaction().commit(); } catch (Exception e) {
+		 * session.getTransaction().rollback(); }
+		 */
+
+		Inforservice inforservice = new Inforservice();
+		// lst = inforservice.lstInfor(1);
+
+		// System.out.println(" danh sach ne " + lst.get(0).getName());
+		try {
+			inforservice.getPartnerService();
+			System.out.println("thanh cong");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
+
 	}
 
 }

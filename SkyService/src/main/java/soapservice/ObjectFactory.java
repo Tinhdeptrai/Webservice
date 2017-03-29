@@ -30,11 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetListTypeRoom }
+     * Create an instance of {@link GetListRoom }
      * 
      */
-    public GetListTypeRoom createGetListTypeRoom() {
-        return new GetListTypeRoom();
+    public GetListRoom createGetListRoom() {
+        return new GetListRoom();
     }
 
     /**
@@ -46,11 +46,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetListTypeRoomResponse }
+     * Create an instance of {@link MyNameResponse }
      * 
      */
-    public GetListTypeRoomResponse createGetListTypeRoomResponse() {
-        return new GetListTypeRoomResponse();
+    public MyNameResponse createMyNameResponse() {
+        return new MyNameResponse();
+    }
+
+    /**
+     * Create an instance of {@link InforHotel }
+     * 
+     */
+    public InforHotel createInforHotel() {
+        return new InforHotel();
+    }
+
+    /**
+     * Create an instance of {@link SetBookRoom }
+     * 
+     */
+    public SetBookRoom createSetBookRoom() {
+        return new SetBookRoom();
+    }
+
+    /**
+     * Create an instance of {@link GetListRoomResponse }
+     * 
+     */
+    public GetListRoomResponse createGetListRoomResponse() {
+        return new GetListRoomResponse();
     }
 
     /**
@@ -59,6 +83,30 @@ public class ObjectFactory {
      */
     public ArrayOfGROUPROOM createArrayOfGROUPROOM() {
         return new ArrayOfGROUPROOM();
+    }
+
+    /**
+     * Create an instance of {@link SetInforCustomerResponse }
+     * 
+     */
+    public SetInforCustomerResponse createSetInforCustomerResponse() {
+        return new SetInforCustomerResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetListTypeRoom }
+     * 
+     */
+    public GetListTypeRoom createGetListTypeRoom() {
+        return new GetListTypeRoom();
+    }
+
+    /**
+     * Create an instance of {@link GetListTypeRoomResponse }
+     * 
+     */
+    public GetListTypeRoomResponse createGetListTypeRoomResponse() {
+        return new GetListTypeRoomResponse();
     }
 
     /**
@@ -86,11 +134,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SetBookRoom }
+     * Create an instance of {@link MyName }
      * 
      */
-    public SetBookRoom createSetBookRoom() {
-        return new SetBookRoom();
+    public MyName createMyName() {
+        return new MyName();
     }
 
     /**
@@ -115,14 +163,6 @@ public class ObjectFactory {
      */
     public ArrayOfHOTELSERVICE createArrayOfHOTELSERVICE() {
         return new ArrayOfHOTELSERVICE();
-    }
-
-    /**
-     * Create an instance of {@link SetInforCustomerResponse }
-     * 
-     */
-    public SetInforCustomerResponse createSetInforCustomerResponse() {
-        return new SetInforCustomerResponse();
     }
 
     /**

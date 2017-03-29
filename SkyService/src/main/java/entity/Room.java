@@ -2,12 +2,14 @@ package entity;
 // Generated Mar 24, 2017 7:27:14 PM by Hibernate Tools 4.3.1.Final
 
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,17 +30,17 @@ public class Room {
 	private Information information;
 	private String type;
 	private String detail;
-	private String quanlity;
+	private int quanlity;
 	private String image;
 	private int maxpeople;
-	private BigDecimal price;
+	private int price;
 	private Set<Booking> bookings = new HashSet<Booking>(0);
 
 
 	public Room() {
 	}
 
-	public Room(int id, Information information, String type, int maxpeople, BigDecimal price) {
+	public Room(int id, Information information, String type, int maxpeople, int price) {
 		this.id = id;
 		this.information = information;
 		this.type = type;
@@ -46,8 +48,8 @@ public class Room {
 		this.price = price;
 	}
 
-	public Room(int id, Information information, String type, String detail, String quanlity,
-			int maxpeople, BigDecimal price, Set<Booking> bookings, String image) {
+	public Room(int id, Information information, String type, String detail, int quanlity,
+			int maxpeople, int price, Set<Booking> bookings, String image) {
 		this.id = id;
 		this.information = information;
 		this.type = type;
@@ -61,7 +63,7 @@ public class Room {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -110,11 +112,11 @@ public class Room {
 	}
 
 	@Column(name = "quanlity")
-	public String getQuanlity() {
+	public int getQuanlity() {
 		return this.quanlity;
 	}
 
-	public void setQuanlity(String quanlity) {
+	public void setQuanlity(int quanlity) {
 		this.quanlity = quanlity;
 	}
 
@@ -128,11 +130,11 @@ public class Room {
 	}
 
 	@Column(name = "price", nullable = false, scale = 4)
-	public BigDecimal getPrice() {
+	public int getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

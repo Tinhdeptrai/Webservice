@@ -57,6 +57,15 @@ public class InforResource {
 		return inforservice.listType();
 	}
 
+	@Path("/listinfor")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Information> lstInfor(@QueryParam("partner") String partner) {
+		Inforservice inforservice = new Inforservice();
+		int tamp = Integer.parseInt(partner);
+		return inforservice.lstInfor(tamp);
+	}
+
 	@Path("/rating")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -80,11 +89,12 @@ public class InforResource {
 	@Path("/search")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Information> findDistricAndProvinceAndType(@QueryParam("partner") int partner,
+	public List<Information> findDistricAndProvinceAndType(@QueryParam("partner") String partnerTamp,
 			@QueryParam("province") String province, @QueryParam("district") String distric,
 			@QueryParam("type") String type) {
 		Inforservice inforservice = new Inforservice();
 
+		int partner = Integer.parseInt(partnerTamp);
 		if (distric == null && type == null) {
 			return inforservice.searchProvince(partner, province);
 		} else if (type == null) {

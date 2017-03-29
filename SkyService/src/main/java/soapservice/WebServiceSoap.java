@@ -41,6 +41,17 @@ public interface WebServiceSoap {
     /**
      * 
      * @return
+     *     returns org.tempuri.ArrayOfGROUPROOM
+     */
+    @WebMethod(action = "http://tempuri.org/getListRoom")
+    @WebResult(name = "getListRoomResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "getListRoom", targetNamespace = "http://tempuri.org/", className = "org.tempuri.GetListRoom")
+    @ResponseWrapper(localName = "getListRoomResponse", targetNamespace = "http://tempuri.org/", className = "org.tempuri.GetListRoomResponse")
+    public ArrayOfGROUPROOM getListRoom();
+
+    /**
+     * 
+     * @return
      *     returns org.tempuri.ArrayOfHOTELSERVICE
      */
     @WebMethod(action = "http://tempuri.org/lstService")
@@ -111,5 +122,16 @@ public interface WebServiceSoap {
         XMLGregorianCalendar dtCheckIn,
         @WebParam(name = "dtCheckOut", targetNamespace = "http://tempuri.org/")
         XMLGregorianCalendar dtCheckOut);
+
+    /**
+     * 
+     * @return
+     *     returns org.tempuri.InforHotel
+     */
+    @WebMethod(action = "http://tempuri.org/myName")
+    @WebResult(name = "myNameResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "myName", targetNamespace = "http://tempuri.org/", className = "org.tempuri.MyName")
+    @ResponseWrapper(localName = "myNameResponse", targetNamespace = "http://tempuri.org/", className = "org.tempuri.MyNameResponse")
+    public InforHotel myName();
 
 }

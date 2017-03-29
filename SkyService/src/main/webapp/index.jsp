@@ -87,12 +87,12 @@
 
 
 			<tr>
-				<td>3</td>
-				<td>Sugar</td>
-				<td>Good</td>
-
+				<td>/SkyService/rest/infor/listinfor</td>
+				<td>partner</td>
+				<td>partner=1 trả về danh sách khách sạn partner=2 trả về danh
+					sách nhà hàng</td>
 			</tr>
-
+	
 		</table>
 		<tr>* Đối với API /SkyService/rest/infor/search có thể truyền
 			nhiều param trong cùng một lúc
