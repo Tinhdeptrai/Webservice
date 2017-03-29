@@ -1,0 +1,15 @@
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:11:25 +0700] "GET /SkyService/ HTTP/1.1" 200 2630 http-bio-8080-exec-1 647
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:11:27 +0700] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-2 0
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:12:08 +0700] "GET /SkyService/rest/infor/type HTTP/1.1" 200 189 http-bio-8080-exec-3 2564
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:12:29 +0700] "GET /SkyService/rest/infor/type HTTP/1.1" 200 189 http-bio-8080-exec-4 91
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:12:51 +0700] "GET /SkyService/rest/infor/rating HTTP/1.1" 200 151 http-bio-8080-exec-5 208
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:13:46 +0700] "GET /SkyService/rest/infor/search?partner=1&province=HCM HTTP/1.1" 200 14 http-bio-8080-exec-6 71
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:14:46 +0700] "GET /SkyService/rest/infor/search?partner=2&province=HCM HTTP/1.1" 200 14 http-bio-8080-exec-8 53
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:14:51 +0700] "GET /SkyService/rest/infor/search?province=HCM HTTP/1.1" 200 14 http-bio-8080-exec-9 46
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:15:08 +0700] "GET /SkyService/rest/infor/search?province=HCM&partner=1 HTTP/1.1" 200 14 http-bio-8080-exec-10 46
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:16:50 +0700] "GET /SkyService/rest/infor/5/food HTTP/1.1" 200 14 http-bio-8080-exec-2 1883
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:17:09 +0700] "GET /SkyService/rest/infor/65/food HTTP/1.1" 200 14 http-bio-8080-exec-3 75
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:19:01 +0700] "GET /SkyService/rest/infor/65/food HTTP/1.1" 200 14 http-bio-8080-exec-6 79
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:19:01 +0700] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-7 0
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:19:03 +0700] "GET /SkyService/ HTTP/1.1" 200 2630 http-bio-8080-exec-8 30
+0:0:0:0:0:0:0:1 - - [29/Mar/2017:08:19:25 +0700] "GET /SkyService/rest/infor/search?partner=1&province=Tp.%20H%E1%BB%93%20Ch%C3%AD%20Minh HTTP/1.1" 200 14 http-bio-8080-exec-9 66
