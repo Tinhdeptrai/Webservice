@@ -162,7 +162,9 @@ public class Information {
 	@Temporal(TemporalType.TIME)
 	@Column(name = "timeopen", nullable = false, length = 13)
 	public Date getTimeopen() {
-		return this.timeopen;
+//		SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
+//        String time = localDateFormat.format(timeopen);
+		return timeopen;
 	}
 
 	public void setTimeopen(Date timeopen) {
@@ -172,7 +174,9 @@ public class Information {
 	@Temporal(TemporalType.TIME)
 	@Column(name = "timeclose", nullable = false, length = 13)
 	public Date getTimeclose() {
-		return this.timeclose;
+//		SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
+//        String time = localDateFormat.format(timeclose);
+		return timeclose;
 	}
 
 	public void setTimeclose(Date timeclose) {

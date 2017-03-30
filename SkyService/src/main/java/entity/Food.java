@@ -1,7 +1,6 @@
 package entity;
 // Generated Mar 24, 2017 7:27:14 PM by Hibernate Tools 4.3.1.Final
 
-import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,20 +25,20 @@ public class Food  {
 	private Information information;
 	private String detail;
 	private String foodname;
-	private BigDecimal price;
+	private int price;
 	private String image;
 
 	public Food() {
 	}
 
-	public Food(int id, Information information, String foodname, BigDecimal price) {
+	public Food(int id, Information information, String foodname, int price) {
 		this.id = id;
 		this.information = information;
 		this.foodname = foodname;
 		this.price = price;
 	}
 
-	public Food(int id, Information information, String detail, String foodname, BigDecimal price) {
+	public Food(int id, Information information, String detail, String foodname, int price) {
 		this.id = id;
 		this.information = information;
 		this.detail = detail;
@@ -99,11 +98,11 @@ public class Food  {
 	}
 
 	@Column(name = "price", nullable = false, scale = 4)
-	public BigDecimal getPrice() {
+	public int getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

@@ -68,7 +68,7 @@
 			</tr>
 
 			<tr>
-				<td>/SkyService/rest/price</td>
+				<td>/SkyService/rest/infor/search</td>
 				<td>type</td>
 				<td>trả về danh sách các khách sạn(1) hay nhà hàng(2) theo thể
 					loại</td>

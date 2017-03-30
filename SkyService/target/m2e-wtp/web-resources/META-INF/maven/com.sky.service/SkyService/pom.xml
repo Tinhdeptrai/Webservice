@@ -7,12 +7,35 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SkyService Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 	<dependencies>
 
 
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-search-orm</artifactId>
+   <version>5.7.0.Final</version>
+</dependency>
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-search-infinispan</artifactId>
+   <version>5.7.0.Final</version>
+</dependency>
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-search-elasticsearch</artifactId>
+   <version>5.7.0.Final</version>
+</dependency>
 
 
+
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901.jdbc4</version>
+        </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

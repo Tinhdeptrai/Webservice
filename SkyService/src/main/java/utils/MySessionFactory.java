@@ -13,15 +13,17 @@ public class MySessionFactory {
 
 	}
 
-//	@SuppressWarnings("deprecation")
+	// @SuppressWarnings("deprecation")
 	public static SessionFactory getSessionFactory() {
-		System.out.println("bat dau tao fac1");
-		// StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		// System.out.println("bat dau tao fac1");
+		// StandardServiceRegistry standardRegistry = new
+		// StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		ServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-		System.out.println("bat dau tao fac2"+registry);
+		// System.out.println("bat dau tao fac2"+registry);
 		if (fac == null) {
 			try {
-			//	fac = (SessionFactory) new MetadataSources(standardRegistry).getMetadataBuilder().build();
+				// fac = (SessionFactory) new
+				// MetadataSources(standardRegistry).getMetadataBuilder().build();
 				Metadata meta = new MetadataSources(registry).getMetadataBuilder().build();
 				fac = meta.getSessionFactoryBuilder().build();
 				System.out.println("tao fac thanh cong");

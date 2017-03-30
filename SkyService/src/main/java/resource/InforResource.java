@@ -9,9 +9,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import entity.RatingCount;
-import entity.Room;
 import entity.Information;
+import entity.InformationRating;
+import entity.Room;
+import entity.Serviceinfor;
 import services.Inforservice;
 
 @Path("/infor")
@@ -65,13 +66,23 @@ public class InforResource {
 		int tamp = Integer.parseInt(partner);
 		return inforservice.lstInfor(tamp);
 	}
-
+	
+	@Path("/inforroomservice")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Serviceinfor> roomservice(@QueryParam("id") String id) {
+		Inforservice inforservice = new Inforservice();
+		int temp = Integer.parseInt(id);
+		return inforservice.getListInforRoom(temp);
+	}
+	
 	@Path("/rating")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<RatingCount> rating() {
+	public List<InformationRating> rating(@QueryParam("partner") String partner) {
 		Inforservice inforservice = new Inforservice();
-		return inforservice.rating();
+		int tamp = Integer.parseInt(partner);
+		return inforservice.lstInfor1(tamp);
 	}
 
 	@Path("/price")
@@ -99,7 +110,7 @@ public class InforResource {
 			return inforservice.searchProvince(partner, province);
 		} else if (type == null) {
 			return inforservice.searchDistrictAndProvince(partner, province, distric);
-		} else if (distric == null && type != null) {
+		} else if (distric == null && type != null && province != null ) {
 			return inforservice.searchTypeAndProvince(partner, province, type);
 		} else if (province == null && distric == null) {
 			return inforservice.searchType(partner, type);
@@ -126,4 +137,6 @@ public class InforResource {
 	public FoodResource getFoodResource() {
 		return new FoodResource();
 	}
+
+
 }

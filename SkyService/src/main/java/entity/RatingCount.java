@@ -10,29 +10,65 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class RatingCount {
 
-	@XmlElement(name = "id")
-	private Integer id;
+	private int id;
 
 	@XmlElement(name = "rating")
-	private Long ratingNo;
+	private long ratingNo;
+	@XmlElement(name = "infor")
+	private Information information;
+	@XmlElement(name = "price")
+	private int price;
+	
+	
+	public RatingCount(int id, long ratingNo, Information information, int price) {
+		super();
+		this.id = id;
+		this.ratingNo = ratingNo;
+		this.information = information;
+		this.price = price;
+	}
 
-	public Integer getId() {
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public RatingCount(int id, long ratingNo, Information information) {
+		super();
+		this.id = id;
+		this.ratingNo = ratingNo;
+		this.information = information;
+	}
+
+	public Information getInformation() {
+		return information;
+	}
+
+	public void setInformation(Information information) {
+		this.information = information;
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public Long getRatingNo() {
+	public long getRatingNo() {
+		
 		return ratingNo;
 	}
 
-	public void setRatingNo(Long ratingNo) {
+	public void setRatingNo(long ratingNo) {
 		this.ratingNo = ratingNo;
 	}
 
-	public RatingCount(Integer id, Long ratingNo) {
+	public RatingCount(int id, long ratingNo) {
 		super();
 		this.id = id;
 		this.ratingNo = ratingNo;
@@ -41,8 +77,5 @@ public class RatingCount {
 	public RatingCount() {
 		super();
 	}
-
-
-
 
 }

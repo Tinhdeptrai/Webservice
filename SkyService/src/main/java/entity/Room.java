@@ -73,7 +73,7 @@ public class Room {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "infor", nullable = false)
 	@XmlTransient
 	public Information getInformation() {
