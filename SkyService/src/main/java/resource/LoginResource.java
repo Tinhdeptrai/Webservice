@@ -6,18 +6,33 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.json.JSONObject;
+
 import entity.Users;
 import services.LoginService;
 
-@Path("/login")
+@Path("/user")
 public class LoginResource {
 
 	@GET
+	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Users loginService(@QueryParam("email") String email, @QueryParam("password") String password) {
-		System.out.println(email + " pass " + password);
+		// System.out.println(email + " pass " + password);
 		LoginService loginService = new LoginService();
 		return loginService.login(email, password);
 	}
 
+	@GET
+	@Path("registry")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String registryService(@QueryParam("email") String email, @QueryParam("password") String password,
+			@QueryParam("phone") String phone, @QueryParam("name") String name) {
+		// System.out.println(email + " pass " + password);
+		LoginService loginService = new LoginService();
+		Boolean bl = loginService.Registry(email, password, name, phone);
+		JSONObject object = new JSONObject();
+		object.put("result", String.valueOf(bl));
+		return object.toString();
+	}
 }

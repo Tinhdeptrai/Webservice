@@ -33,4 +33,30 @@ public class LoginService {
 
 	}
 
+	public Boolean Registry(String email, String password, String name, String phone) {
+		List<Users> lst = new ArrayList<>();
+		Session session = null;
+		try {
+			String str = "from Users E where E.email = " + "'" + email + "'";
+			session = MySessionFactory.getSessionFactory().openSession();
+			Query query = (Query) session.createQuery(str);
+			lst = query.list();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		if (lst == null)
+			return false;
+		else {
+			Users users = new Users();
+			users.setEmail(email);
+			users.setPassword(password);
+			users.setFullname(name);
+			users.setPhone(phone);
+			users.setPoint(1);
+			session.saveOrUpdate(users);
+			return true;
+		}
+
+	}
+
 }

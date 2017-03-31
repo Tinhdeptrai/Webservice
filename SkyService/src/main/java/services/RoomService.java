@@ -3,10 +3,14 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import entity.Room;
+import soapservice.WebService;
+import soapservice.WebServiceSoap;
 import utils.MySessionFactory;
 
 @SuppressWarnings("unchecked")
@@ -25,4 +29,15 @@ public class RoomService {
 		return lst;
 
 	}
+
+	public Boolean bookRoom(String mail, int loaiPhong, XMLGregorianCalendar dtCheckIn, XMLGregorianCalendar dtCheckOut,String name, String sdt, String iDcard) {
+
+		WebService webService = new WebService();
+		WebServiceSoap serviceSoap = webService.getWebServiceSoap();
+		serviceSoap.setInforCustomer(name, mail, sdt, iDcard);
+		Boolean result = serviceSoap.setBookRoom(mail, loaiPhong, dtCheckIn, dtCheckOut);
+		
+		return result;
+	}
+
 }
