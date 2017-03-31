@@ -57,7 +57,7 @@ public class InforResource {
 		Inforservice inforservice = new Inforservice();
 		return inforservice.listType();
 	}
-
+/*
 	@Path("/listinfor")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -65,7 +65,7 @@ public class InforResource {
 		Inforservice inforservice = new Inforservice();
 		int tamp = Integer.parseInt(partner);
 		return inforservice.lstInfor(tamp);
-	}
+	}*/
 	
 	@Path("/inforroomservice")
 	@GET
@@ -76,7 +76,7 @@ public class InforResource {
 		return inforservice.getListInforRoom(temp);
 	}
 	
-	@Path("/rating")
+	@Path("/listinfor")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<InformationRating> rating(@QueryParam("partner") String partner) {

@@ -29,32 +29,28 @@
 			<tr>
 				<td>/SkyService/rest/infor/{name restaurant}</td>
 				<td>none</td>
-				<td>Tìm theo tên của nhà hàng</td>
+				<td>Tìm theo tên của nhà hàng or khách sạn</td>
 
 			</tr>
 
 			<tr>
-				<td>/SkyService/rest/infor/rating</td>
+				<td>/SkyService/rest/infor/type</td>
 				<td>none</td>
-				<td>trả về danh sách bảng xếp hạng nhà hàng</td>
+				<td>trả về thể loại của nhà hàng</td>
 			</tr>
 
 			<tr>
-				<td>/SkyService/rest/infor/rating</td>
-				<td>none</td>
-				<td>trả về danh sách bảng xếp hạng nhà hàng</td>
+				<td>/SkyService/rest/infor/listinfor</td>
+				<td>partner</td>
+				<td>trả về danh sách nhà hàng or khách sạn</td>
 			</tr>
 
 			<tr>
-				<td>/SkyService/rest/infor/pricestart=1&priceend=10</td>
+				<td>/SkyService/rest/infor/price?pricestart=10000&priceend=150000</td>
 				<td>pricestart, pticeend</td>
 				<td>trả về danh các phòng có giá theo điều kiện</td>
 			</tr>
-			<tr>
-				<td>/SkyService/rest/infor/search</td>
-				<td>partner</td>
-				<td>trả về danh sách các khách sạn(1) hay nhà hàng(2)</td>
-			</tr>
+		
 			<tr>
 				<td>/SkyService/rest/infor/search</td>
 				<td>province</td>
@@ -86,12 +82,6 @@
 			</tr>
 
 
-			<tr>
-				<td>/SkyService/rest/infor/listinfor</td>
-				<td>partner</td>
-				<td>partner=1 trả về danh sách khách sạn partner=2 trả về danh
-					sách nhà hàng</td>
-			</tr>
 	
 		</table>
 		<tr>* Đối với API /SkyService/rest/infor/search có thể truyền

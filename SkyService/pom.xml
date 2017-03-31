@@ -28,6 +28,7 @@
    <artifactId>hibernate-search-elasticsearch</artifactId>
    <version>5.7.0.Final</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
 
 
 

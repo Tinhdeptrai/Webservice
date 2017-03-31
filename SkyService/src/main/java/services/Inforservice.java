@@ -13,6 +13,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+
 import entity.Image;
 import entity.ImageId;
 import entity.Information;
@@ -33,27 +34,27 @@ import utils.MySessionFactory;
 @SuppressWarnings("unchecked")
 public class Inforservice {
 
-	/*
-	public List<Information> search(String keyword) {
-		Session session = sessionFactory.getCurrentSession();
+	
+	/*public List<Information> searchAll(String keyword) {
+		Session session = (Session) MySessionFactory.getSessionFactory();
 
 		FullTextSession fullTextSession = Search.getFullTextSession(session);
 
 		QueryBuilder qb = fullTextSession.getSearchFactory()
-					.buildQueryBuilder().forEntity(Book.class).get();
+					.buildQueryBuilder().forEntity(Information.class).get();
 		org.apache.lucene.search.Query query = qb
-					.keyword().onFields("title", "description", "author") // Chỉ định tìm theo cột nào
+					.keyword().onFields("name", "district", "type","province") // Chỉ định tìm theo cột nào
 					.matching(keyword)
 					.createQuery();
 
 		org.hibernate.Query hibQuery =
-					fullTextSession.createFullTextQuery(query, Book.class);
+					fullTextSession.createFullTextQuery(query, Information.class);
 
-		List<Book> results = hibQuery.list();
+		List<Information> results = hibQuery.list();
 		return results;
-	}
+	}*/
 	
-	*/
+	
 	
 	
 	public List<Information> search(String column, String value) {
@@ -70,6 +71,19 @@ public class Inforservice {
 		return lst;
 	}
 
+	public List<Information> search2(String column, String value) {
+		List<Information> lst = new ArrayList<>();
+		try {
+			String str = "SELECT * FROM INFORMATION WHERE " + column + " like " + "N'%" + value + "%'";
+			Session session = MySessionFactory.getSessionFactory().openSession();
+			Query query = (Query) session.createSQLQuery(str);
+			System.out.println("abc");
+			lst = query.list();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return lst;
+	}
 	public List<Room> searchMoney(int moneyStart, int moneyEnd) {
 		List<Room> lst = new ArrayList<>();
 		try {
