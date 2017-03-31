@@ -108,7 +108,7 @@ public class InforResource {
 		int partner = Integer.parseInt(partnerTamp);
 		if (distric == null && type == null) {
 			return inforservice.searchProvince(partner, province);
-		} else if (type == null) {
+		} else if (type == null&&distric != null && province != null) {
 			return inforservice.searchDistrictAndProvince(partner, province, distric);
 		} else if (distric == null && type != null && province != null ) {
 			return inforservice.searchTypeAndProvince(partner, province, type);

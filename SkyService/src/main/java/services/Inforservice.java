@@ -56,14 +56,18 @@ public class Inforservice {
 	
 	
 	
+
+	
+	
 	
 	public List<Information> search(String column, String value) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E." + column + " like " + "'%" + value + "%'";
+			String str = "from Information E where E." + column + " like :value";
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
-			System.out.println("abc");
+			query.setParameter("value","%"+value+"%");
+			//System.out.println("abc");
 			lst = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -71,23 +75,12 @@ public class Inforservice {
 		return lst;
 	}
 
-	public List<Information> search2(String column, String value) {
-		List<Information> lst = new ArrayList<>();
-		try {
-			String str = "SELECT * FROM INFORMATION WHERE " + column + " like " + "N'%" + value + "%'";
-			Session session = MySessionFactory.getSessionFactory().openSession();
-			Query query = (Query) session.createSQLQuery(str);
-			System.out.println("abc");
-			lst = query.list();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return lst;
-	}
+
 	public List<Room> searchMoney(int moneyStart, int moneyEnd) {
 		List<Room> lst = new ArrayList<>();
 		try {
 			String str = "from Room E where E.price between " + moneyStart + " and " + moneyEnd + "order by E.price";
+			
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
 			lst = query.list();
@@ -100,10 +93,12 @@ public class Inforservice {
 	public List<Information> searchProvince(int partner, String province) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.province like " + "'%" + province + "%'" + " and E.partner = "
+			String str = "from Information E where E.province like :province" + " and E.partner = "
 					+ partner;
+			
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
+			query.setParameter("province","%"+province+"%");
 			lst = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -114,10 +109,11 @@ public class Inforservice {
 	public List<Information> searchDistrictAndProvince(int partner, String province, String distric) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.province = " + "'%" + province + "%'" + "and E.district = " + "'%"
-					+ distric + "%'" + "and E.partner = " + partner;
+			String str = "from Information E where E.province like :province" + " and (E.district like :distric)" + " and E.partner like " + partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
+			query.setParameter("province","%"+province+"%");
+			query.setParameter("distric","%"+distric+"%");
 			lst = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -128,10 +124,11 @@ public class Inforservice {
 	public List<Information> searchTypeAndProvince(int partner, String province, String type) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.province = " + "'%" + province + "%'" + "and E.type = " + "'%"
-					+ type + "%'" + " and E.partner = " + partner;
+			String str = "from Information E where E.province like :province" + " and (E.type like :type)"  + " and E.partner = " + partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
+			query.setParameter("province","%"+province+"%");
+			query.setParameter("type","%"+type+"%");
 			lst = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -139,15 +136,17 @@ public class Inforservice {
 		return lst;
 	}
 
-	public List<Information> searchDistrictAndProvinceAndType(int partner, String province, String distric,
+	public List<Information> searchDistrictAndProvinceAndType(int partner, String province, String district,
 			String type) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.province like " + "'%" + province + "%'" + "and E.district = " + "'%"
-					+ distric + "%'" + "and E.type like " + "'%" + type + "%'" + "and E.partner = " + partner;
+			String str = "from Information E where E.province like :province" + " and ((E.district like :district)" + " and (E.type like :type))"  + "and E.partner = " + partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
-			lst = query.list();
+			query.setParameter("province","%"+province+"%");
+			query.setParameter("district","%"+district+"%"); 
+			query.setParameter("type","%"+type+"%"); 
+			lst = query.list(); 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -158,9 +157,10 @@ public class Inforservice {
 	public List<Information> searchType(int partner, String type) {
 		List<Information> lst = new ArrayList<>();
 		try {
-			String str = "from Information E where E.type like " + "'%" + type + "%'" + " and E.partner = " + partner;
+			String str = "from Information E where E.type like :type" + " and E.partner = " + partner;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
+			query.setParameter("type","%"+type+"%");
 			lst = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
