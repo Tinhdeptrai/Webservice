@@ -50,7 +50,7 @@
 				<td>pricestart, pticeend</td>
 				<td>trả về danh các phòng có giá theo điều kiện</td>
 			</tr>
-		
+
 			<tr>
 				<td>/SkyService/rest/infor/search</td>
 				<td>province</td>
@@ -73,16 +73,25 @@
 			<tr>
 				<td>/SkyService/rest/{InforID}/room</td>
 				<td>none</td>
-				<td>trả về danh sách các phòng của khách sạn/td>
+				<td>trả về danh sách các phòng của khách sạn</td>
 			</tr>
 			<tr>
-				<td>/SkyService/rest/login</td>
+				<td>/SkyService/rest/user/login</td>
 				<td>email,password</td>
-				<td>trả về thông tin người dùng/td>
+				<td>trả về thông tin người dùng</td>
+			</tr>
+			<tr>
+				<td>/SkyService/rest/user/registry</td>
+				<td>email,password,phone,name</td>
+				<td>Đăng ký thành viên</td>
+			</tr>
+			<tr>
+				<td>/SkyService/rest/infor/15/room/bookroom</td>
+				<td>email,loaiphong,checkout,checkin,phone,name,idcard</td>
+				<td>Đặt phòng</td>
 			</tr>
 
 
-	
 		</table>
 		<tr>* Đối với API /SkyService/rest/infor/search có thể truyền
 			nhiều param trong cùng một lúc

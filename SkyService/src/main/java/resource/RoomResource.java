@@ -53,7 +53,7 @@ public class RoomResource {
 	public XMLGregorianCalendar stringToXMLGregorianCalendar(String str)
 			throws ParseException, DatatypeConfigurationException {
 		Date dob = null;
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		dob = df.parse(str);
 		GregorianCalendar cal = new GregorianCalendar();
 

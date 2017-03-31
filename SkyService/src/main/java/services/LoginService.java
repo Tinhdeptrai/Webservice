@@ -44,7 +44,7 @@ public class LoginService {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		if (lst == null)
+		if (lst != null)
 			return false;
 		else {
 			Users users = new Users();
@@ -53,7 +53,9 @@ public class LoginService {
 			users.setFullname(name);
 			users.setPhone(phone);
 			users.setPoint(1);
+			session.getTransaction().begin();
 			session.saveOrUpdate(users);
+			session.getTransaction().commit();
 			return true;
 		}
 
