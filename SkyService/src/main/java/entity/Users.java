@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -24,17 +25,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name = "USERS")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 public class Users {
-
+	@XmlElement(name = "id")
 	private int id;
+	@XmlElement(name = "fullname")
 	private String fullname;
+	@XmlElement(name = "phone")
 	private String phone;
+	@XmlElement(name = "email")
 	private String email;
+	@XmlElement(name = "password")
 	private String password;
+	
+	@XmlElement(name = "point")
 	private int point;
+	@XmlElement(name = "booking")
 	private Set<Booking> bookings = new HashSet<Booking>(0);
-
+	
 	private Set<Information> informations = new HashSet<Information>(0);
 
 	public Users() {

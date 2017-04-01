@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -42,13 +41,20 @@ public class InforResource {
 	 * "param : " + param); return inforservice.search(words[0], words[1]); }
 	 */
 
-	@Path("/{name}")
+	/*@Path("/{name}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Information> findName(@PathParam("name") String name) {
 		Inforservice inforservice = new Inforservice();
 		return inforservice.search("name", name);
-	}
+	}*/
+/*	@Path("/name")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<InformationRating> findName(@QueryParam("name") String name,@QueryParam("partner") int partner) {
+		Inforservice inforservice = new Inforservice();
+		return inforservice.search("name", name,partner);
+	}*/
 
 	@Path("/type")
 	@GET
@@ -57,6 +63,7 @@ public class InforResource {
 		Inforservice inforservice = new Inforservice();
 		return inforservice.listType();
 	}
+	
 /*
 	@Path("/listinfor")
 	@GET
@@ -84,7 +91,27 @@ public class InforResource {
 		int tamp = Integer.parseInt(partner);
 		return inforservice.lstInfor1(tamp);
 	}
-
+	
+	@Path("/searchName")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<InformationRating> searchName(@QueryParam("partner") String partner,@QueryParam("key") String key) {
+		Inforservice inforservice = new Inforservice();
+		int tamp = Integer.parseInt(partner);
+		return inforservice.searchName(tamp, key);
+	}
+	@Path("/searchProvince")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<InformationRating> searchProvince(@QueryParam("partner") String partner,@QueryParam("key") String key) {
+		Inforservice inforservice = new Inforservice();
+		int tamp = Integer.parseInt(partner);
+		return inforservice.searchProvinces(tamp, key);
+	}
+	
+	
+	
+	
 	@Path("/price")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -118,15 +145,6 @@ public class InforResource {
 			return inforservice.searchDistrictAndProvinceAndType(partner, province, distric, type);
 	}
 
-	/*
-	 * @GET
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON) public List<Information>
-	 * findType(@QueryParam("type") String type) { Inforservice inforservice =
-	 * new Inforservice(); return inforservice.searchProvince(type);
-	 * 
-	 * }
-	 */
 
 	@Path("/{InforID}/room")
 	public RoomResource getRoomResource() {

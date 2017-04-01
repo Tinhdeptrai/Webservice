@@ -22,6 +22,7 @@ public class LoginService {
 			lst = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			return null;
 		}
 		if (lst != null)
 			if (lst.get(0).getPassword().equals(password))
@@ -31,6 +32,10 @@ public class LoginService {
 		else
 			return null;
 
+	}
+	
+	public void getBooking(){
+		
 	}
 
 	public Boolean Registry(String email, String password, String name, String phone) {

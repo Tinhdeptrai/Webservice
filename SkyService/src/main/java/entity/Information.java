@@ -68,10 +68,11 @@ public class Information {
 	@XmlElement(name = "images")
 	public Set<Image> images = new HashSet<Image>(0);
 	private Set<Users> userses = new HashSet<Users>(0);
-
+	@XmlElement(name = "services")
 	private Set<Service> services = new HashSet<Service>(0);
-
+	@XmlElement(name = "room")
 	private Set<Room> rooms = new HashSet<Room>(0);
+	@XmlElement(name = "foods")
 	private Set<Food> foods = new HashSet<Food>(0);
 
 	public Information() {
