@@ -30,13 +30,12 @@ public class RoomService {
 
 	}
 
-	public Boolean bookRoom(String mail, int loaiPhong, XMLGregorianCalendar dtCheckIn, XMLGregorianCalendar dtCheckOut,String name, String sdt, String iDcard) {
+	public Boolean bookRoomService(String mail, int loaiPhong, XMLGregorianCalendar dtCheckIn, XMLGregorianCalendar dtCheckOut,String name, String sdt, String iDcard) {
 
 		WebService webService = new WebService();
 		WebServiceSoap serviceSoap = webService.getWebServiceSoap();
 		serviceSoap.setInforCustomer(name, mail, sdt, iDcard);
 		Boolean result = serviceSoap.setBookRoom(mail, loaiPhong, dtCheckIn, dtCheckOut);
-		
 		return result;
 	}
 

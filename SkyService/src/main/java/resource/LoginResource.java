@@ -1,6 +1,8 @@
 package resource;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -12,6 +14,7 @@ import entity.Users;
 import services.LoginService;
 
 @Path("/user")
+@Consumes("application/json")
 public class LoginResource {
 
 	@GET
@@ -23,16 +26,45 @@ public class LoginResource {
 		return loginService.login(email, password);
 	}
 
+	/*
+	 * @GET
+	 * 
+	 * @Path("registry")
+	 * 
+	 * @Produces(MediaType.APPLICATION_JSON) public String
+	 * registryService(@QueryParam("email") String
+	 * email, @QueryParam("password") String password,
+	 * 
+	 * @QueryParam("phone") String phone, @QueryParam("name") String name) { //
+	 * System.out.println(email + " pass " + password); LoginService
+	 * loginService = new LoginService(); Boolean bl =
+	 * loginService.Registry(email, password, name, phone); JSONObject object =
+	 * new JSONObject(); object.put("result", String.valueOf(bl)); return
+	 * object.toString(); }
+	 */
+
 	@GET
-	@Path("registry")
+	@Path("checkemail")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String registryService(@QueryParam("email") String email, @QueryParam("password") String password,
-			@QueryParam("phone") String phone, @QueryParam("name") String name) {
+	public String checkmail(@QueryParam("email") String email) {
 		// System.out.println(email + " pass " + password);
 		LoginService loginService = new LoginService();
-		Boolean bl = loginService.Registry(email, password, name, phone);
+
+		Boolean bl = loginService.checkEmail(email);
 		JSONObject object = new JSONObject();
 		object.put("result", String.valueOf(bl));
 		return object.toString();
 	}
+
+	@POST
+	@Path("registry")
+	public String registry(Users user) {
+		LoginService loginService = new LoginService();
+
+		Boolean bl = loginService.addUser(user);
+		JSONObject object = new JSONObject();
+		object.put("result", String.valueOf(bl));
+		return object.toString();
+	}
+
 }

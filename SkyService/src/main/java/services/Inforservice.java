@@ -13,7 +13,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-
 import entity.Image;
 import entity.ImageId;
 import entity.Information;
@@ -34,140 +33,349 @@ import utils.MySessionFactory;
 @SuppressWarnings("unchecked")
 public class Inforservice {
 
-	
-	/*public List<Information> searchAll(String keyword) {
-		Session session = (Session) MySessionFactory.getSessionFactory();
+	/*
+	 * public List<Information> searchAll(String keyword) { Session session =
+	 * (Session) MySessionFactory.getSessionFactory();
+	 * 
+	 * FullTextSession fullTextSession = Search.getFullTextSession(session);
+	 * 
+	 * QueryBuilder qb = fullTextSession.getSearchFactory()
+	 * .buildQueryBuilder().forEntity(Information.class).get();
+	 * org.apache.lucene.search.Query query = qb .keyword().onFields("name",
+	 * "district", "type","province") // Chỉ định tìm theo cột nào
+	 * .matching(keyword) .createQuery();
+	 * 
+	 * org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(query,
+	 * Information.class);
+	 * 
+	 * List<Information> results = hibQuery.list(); return results; }
+	 */
 
-		FullTextSession fullTextSession = Search.getFullTextSession(session);
-
-		QueryBuilder qb = fullTextSession.getSearchFactory()
-					.buildQueryBuilder().forEntity(Information.class).get();
-		org.apache.lucene.search.Query query = qb
-					.keyword().onFields("name", "district", "type","province") // Chỉ định tìm theo cột nào
-					.matching(keyword)
-					.createQuery();
-
-		org.hibernate.Query hibQuery =
-					fullTextSession.createFullTextQuery(query, Information.class);
-
-		List<Information> results = hibQuery.list();
-		return results;
-	}*/
+	/*
+	 * public List<InformationRating> search(String column, String value, int
+	 * partner) { List<InformationRating> lst = new ArrayList<>(); try { String
+	 * str = "from Information E where E." + column + " like :value" +
+	 * " and E.partner = " + partner; Session session =
+	 * MySessionFactory.getSessionFactory().openSession(); Query query = (Query)
+	 * session.createQuery(str); query.setParameter("value", "%" + value + "%");
+	 * // System.out.println("abc"); lst = query.list(); } catch (Exception ex)
+	 * { ex.printStackTrace(); } return lst; }
+	 */
+	/*
+	 * public List<Room> searchMoney(int moneyStart, int moneyEnd) { List<Room>
+	 * lst = new ArrayList<>(); try { String str =
+	 * "from Room E where E.price between " + moneyStart + " and " + moneyEnd +
+	 * "order by E.price";
+	 * 
+	 * Session session = MySessionFactory.getSessionFactory().openSession();
+	 * Query query = (Query) session.createQuery(str); lst = query.list(); }
+	 * catch (Exception ex) { ex.printStackTrace(); } return lst; }
+	 */
 	
 	
-	
-
-	
-	
-	
-	public List<InformationRating> search(String column, String value,int partner) {
-		List<InformationRating> lst = new ArrayList<>();
+	/*@SuppressWarnings("rawtypes")
+	public List<InformationRating> searchMoney(int partner ,int moneyStart, int moneyEnd) {
+		List<InformationRating> list = new ArrayList<>();
+		String temp = "";
+		if (partner == 1) {
+			temp = "(select MIN(room.price) from Room room where room.information.id = e.id)";
+		} else {
+			temp = "(select MIN(room.price) from Food  room where room.information.id = e.id)";
+		}
 		try {
-			String str = "from Information E where E." + column + " like :value" + " and E.partner = "
-					+ partner;
+			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
+					+ "as price " + "from Information e where e.partner = " + partner + " and ( price " + moneyStart + " and " + moneyEnd+ ")" ;
+			// String str = "select COUNT(*) from Rating r where
+			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
+
 			Query query = (Query) session.createQuery(str);
-			query.setParameter("value","%"+value+"%");
-			//System.out.println("abc");
-			lst = query.list();
+			//query.setParameter("name", "%" + name + "%");
+			// query.setFirstResult(0);
+			// query.setMaxResults(10);
+			List<Object> result = query.list();
+
+			result = query.list();
+			Iterator itr = result.iterator();
+			while (itr.hasNext()) {
+				Object[] obj = (Object[]) itr.next();
+				Information infor = (Information) obj[0];
+				Long rating = 0L;
+				Long price = 0L;
+				try {
+					rating = (Long) obj[1];
+					price = Long.parseLong(String.valueOf(obj[2]));
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				list.add(new InformationRating(infor, rating, price));
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			System.out.println(ex + "");
 		}
-		return lst;
+
+		return list;
 	}
+	*/
+	
+	
+	
 
+	/*
+	 * public List<Information> searchProvince(int partner, String province) {
+	 * List<Information> lst = new ArrayList<>(); try { String str =
+	 * "from Information E where E.province like :province" +
+	 * " and E.partner = " + partner;
+	 * 
+	 * Session session = MySessionFactory.getSessionFactory().openSession();
+	 * Query query = (Query) session.createQuery(str);
+	 * query.setParameter("province","%"+province+"%"); lst = query.list(); }
+	 * catch (Exception ex) { ex.printStackTrace(); } return lst; }
+	 */
 
-	public List<Room> searchMoney(int moneyStart, int moneyEnd) {
-		List<Room> lst = new ArrayList<>();
+	/*
+	 * public List<Information> searchDistrictAndProvince(int partner, String
+	 * province, String distric) { List<Information> lst = new ArrayList<>();
+	 * try { String str = "from Information E where E.province like :province" +
+	 * " and (E.district like :distric)" + " and E.partner like " + partner;
+	 * Session session = MySessionFactory.getSessionFactory().openSession();
+	 * Query query = (Query) session.createQuery(str);
+	 * query.setParameter("province","%"+province+"%");
+	 * query.setParameter("distric","%"+distric+"%"); lst = query.list(); }
+	 * catch (Exception ex) { ex.printStackTrace(); } return lst; }
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public List<InformationRating> searchDistrictAndProvince(int partner, String province, String distric) {
+		List<InformationRating> list = new ArrayList<>();
+		String temp = "";
+		if (partner == 1) {
+			temp = "(select MIN(room.price) from Room room where room.information.id = e.id)";
+		} else {
+			temp = "(select MIN(room.price) from Food  room where room.information.id = e.id)";
+		}
 		try {
-			String str = "from Room E where E.price between " + moneyStart + " and " + moneyEnd + "order by E.price";
-			
+			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
+					+ "as price " + "from Information e where e.partner = " + partner + " and e.province like :province"
+					+ " and (e.district like :distric)";
+			// String str = "select COUNT(*) from Rating r where
+			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
+
 			Query query = (Query) session.createQuery(str);
-			lst = query.list();
+			query.setParameter("province", "%" + province + "%");
+			query.setParameter("distric", "%" + distric + "%");
+			// query.setFirstResult(0);
+			// query.setMaxResults(10);
+			List<Object> result = query.list();
+
+			result = query.list();
+			Iterator itr = result.iterator();
+			while (itr.hasNext()) {
+				Object[] obj = (Object[]) itr.next();
+				Information infor = (Information) obj[0];
+				Long rating = 0L;
+				Long price = 0L;
+				try {
+					rating = (Long) obj[1];
+					price = Long.parseLong(String.valueOf(obj[2]));
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				list.add(new InformationRating(infor, rating, price));
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			System.out.println(ex + "a");
 		}
-		return lst;
+
+		return list;
 	}
 
-	public List<Information> searchProvince(int partner, String province) {
-		List<Information> lst = new ArrayList<>();
+	/*
+	 * public List<Information> searchTypeAndProvince(int partner, String
+	 * province, String type) { List<Information> lst = new ArrayList<>(); try {
+	 * String str = "from Information E where E.province like :province" +
+	 * " and (E.type like :type)" + " and E.partner = " + partner; Session
+	 * session = MySessionFactory.getSessionFactory().openSession(); Query query
+	 * = (Query) session.createQuery(str); query.setParameter("province", "%" +
+	 * province + "%"); query.setParameter("type", "%" + type + "%"); lst =
+	 * query.list(); } catch (Exception ex) { ex.printStackTrace(); } return
+	 * lst; }
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public List<InformationRating> searchTypeAndProvince(int partner, String province, String type) {
+		List<InformationRating> list = new ArrayList<>();
+		String temp = "";
+		if (partner == 1) {
+			temp = "(select MIN(room.price) from Room room where room.information.id = e.id)";
+		} else {
+			temp = "(select MIN(room.price) from Food  room where room.information.id = e.id)";
+		}
 		try {
-			String str = "from Information E where E.province like :province" + " and E.partner = "
-					+ partner;
-			
+			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
+					+ "as price " + "from Information e where e.partner = " + partner
+					+ " and (e.province like :province) and (e.type like :type)";
+			// String str = "select COUNT(*) from Rating r where
+			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
+
 			Query query = (Query) session.createQuery(str);
-			query.setParameter("province","%"+province+"%");
-			lst = query.list();
+			query.setParameter("province", "%" + province + "%");
+			query.setParameter("type", "%" + type + "%");
+			// query.setFirstResult(0);
+			// query.setMaxResults(10);
+			List<Object> result = query.list();
+
+			result = query.list();
+			Iterator itr = result.iterator();
+			while (itr.hasNext()) {
+				Object[] obj = (Object[]) itr.next();
+				Information infor = (Information) obj[0];
+				Long rating = 0L;
+				Long price = 0L;
+				try {
+					rating = (Long) obj[1];
+					price = Long.parseLong(String.valueOf(obj[2]));
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				list.add(new InformationRating(infor, rating, price));
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			System.out.println(ex + "a");
 		}
-		return lst;
+
+		return list;
 	}
 
+	/*
+	 * public List<Information> searchDistrictAndProvinceAndType(int partner,
+	 * String province, String district, String type) { List<Information> lst =
+	 * new ArrayList<>(); try { String str =
+	 * "from Information E where E.province like :province" +
+	 * " and ((E.district like :district)" + " and (E.type like :type))" +
+	 * "and E.partner = " + partner; Session session =
+	 * MySessionFactory.getSessionFactory().openSession(); Query query = (Query)
+	 * session.createQuery(str); query.setParameter("province", "%" + province +
+	 * "%"); query.setParameter("district", "%" + district + "%");
+	 * query.setParameter("type", "%" + type + "%"); lst = query.list(); } catch
+	 * (Exception ex) { ex.printStackTrace(); } return lst;
+	 * 
+	 * }
+	 */
 
-	public List<Information> searchDistrictAndProvince(int partner, String province, String distric) {
-		List<Information> lst = new ArrayList<>();
-		try {
-			String str = "from Information E where E.province like :province" + " and (E.district like :distric)" + " and E.partner like " + partner;
-			Session session = MySessionFactory.getSessionFactory().openSession();
-			Query query = (Query) session.createQuery(str);
-			query.setParameter("province","%"+province+"%");
-			query.setParameter("distric","%"+distric+"%");
-			lst = query.list();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return lst;
-	}
-
-	public List<Information> searchTypeAndProvince(int partner, String province, String type) {
-		List<Information> lst = new ArrayList<>();
-		try {
-			String str = "from Information E where E.province like :province" + " and (E.type like :type)"  + " and E.partner = " + partner;
-			Session session = MySessionFactory.getSessionFactory().openSession();
-			Query query = (Query) session.createQuery(str);
-			query.setParameter("province","%"+province+"%");
-			query.setParameter("type","%"+type+"%");
-			lst = query.list();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return lst;
-	}
-
-	public List<Information> searchDistrictAndProvinceAndType(int partner, String province, String district,
+	@SuppressWarnings("rawtypes")
+	public List<InformationRating> searchDistrictAndProvinceAndType(int partner, String province, String district,
 			String type) {
-		List<Information> lst = new ArrayList<>();
+		List<InformationRating> list = new ArrayList<>();
+		String temp = "";
+		if (partner == 1) {
+			temp = "(select MIN(room.price) from Room room where room.information.id = e.id)";
+		} else {
+			temp = "(select MIN(room.price) from Food  room where room.information.id = e.id)";
+		}
 		try {
-			String str = "from Information E where E.province like :province" + " and ((E.district like :district)" + " and (E.type like :type))"  + "and E.partner = " + partner;
+			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
+					+ "as price " + "from Information e where e.partner = " + partner
+					+ " and (e.province like :province) and (e.type like :type) and (e.district like :district)";
+			// String str = "select COUNT(*) from Rating r where
+			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
+
 			Query query = (Query) session.createQuery(str);
-			query.setParameter("province","%"+province+"%");
-			query.setParameter("district","%"+district+"%"); 
-			query.setParameter("type","%"+type+"%"); 
-			lst = query.list(); 
+			query.setParameter("province", "%" + province + "%");
+			query.setParameter("district", "%" + district + "%");
+			query.setParameter("type", "%" + type + "%");
+			// query.setFirstResult(0);
+			// query.setMaxResults(10);
+			List<Object> result = query.list();
+
+			result = query.list();
+			Iterator itr = result.iterator();
+			while (itr.hasNext()) {
+				Object[] obj = (Object[]) itr.next();
+				Information infor = (Information) obj[0];
+				Long rating = 0L;
+				Long price = 0L;
+				try {
+					rating = (Long) obj[1];
+					price = Long.parseLong(String.valueOf(obj[2]));
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				list.add(new InformationRating(infor, rating, price));
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			System.out.println(ex + "a");
 		}
-		return lst;
 
+		return list;
 	}
 
-	public List<Information> searchType(int partner, String type) {
-		List<Information> lst = new ArrayList<>();
+	/*
+	 * public List<Information> searchType(int partner, String type) {
+	 * List<Information> lst = new ArrayList<>(); try { String str =
+	 * "from Information E where E.type like :type" + " and E.partner = " +
+	 * partner; Session session =
+	 * MySessionFactory.getSessionFactory().openSession(); Query query = (Query)
+	 * session.createQuery(str); query.setParameter("type", "%" + type + "%");
+	 * lst = query.list(); } catch (Exception ex) { ex.printStackTrace(); }
+	 * return lst; }
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public List<InformationRating> searchType(int partner, String type) {
+		List<InformationRating> list = new ArrayList<>();
+		String temp = "";
+		if (partner == 1) {
+			temp = "(select MIN(room.price) from Room room where room.information.id = e.id)";
+		} else {
+			temp = "(select MIN(room.price) from Food  room where room.information.id = e.id)";
+		}
 		try {
-			String str = "from Information E where E.type like :type" + " and E.partner = " + partner;
+			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
+					+ "as price " + "from Information e where e.partner = " + partner + " and e.type like :type";
+			// String str = "select COUNT(*) from Rating r where
+			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
+
 			Query query = (Query) session.createQuery(str);
-			query.setParameter("type","%"+type+"%");
-			lst = query.list();
+			query.setParameter("type", "%" + type + "%");
+			// query.setFirstResult(0);
+			// query.setMaxResults(10);
+			List<Object> result = query.list();
+
+			result = query.list();
+			Iterator itr = result.iterator();
+			while (itr.hasNext()) {
+				Object[] obj = (Object[]) itr.next();
+				Information infor = (Information) obj[0];
+				Long rating = 0L;
+				Long price = 0L;
+				try {
+					rating = (Long) obj[1];
+					price = Long.parseLong(String.valueOf(obj[2]));
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				list.add(new InformationRating(infor, rating, price));
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			System.out.println(ex + "");
 		}
-		return lst;
+
+		return list;
 	}
 
 	public List<Information> listAllInfor() {
@@ -214,8 +422,6 @@ public class Inforservice {
 		return arrList;
 
 	}
-
-	
 
 	public void getService() {
 
@@ -266,9 +472,9 @@ public class Inforservice {
 		System.out.println("sdt " + hotel.getHotline());
 		information.setName(hotel.getName());
 
-		//information.setTimeopen(stringToDate(hotel.getTimeopen()));
+		// information.setTimeopen(stringToDate(hotel.getTimeopen()));
 		System.out.println(stringToDate(hotel.getTimeclose()));
-		//information.setTimeclose(stringToDate(hotel.getTimeclose()));
+		// information.setTimeclose(stringToDate(hotel.getTimeclose()));
 		information.setType(hotel.getType());
 		information.setIntro(hotel.getIntro());
 		information.setNumber(hotel.getNumber());
@@ -288,7 +494,6 @@ public class Inforservice {
 		// timeopen, type, urlpartner, ward) values (?, ?, ?, ?, ?, ?, ?, ?, ?,
 		// ?, ?, ?, ?)";
 
-		session.getTransaction().begin();
 		session.saveOrUpdate(information);
 
 		Image images = new Image();
@@ -322,22 +527,21 @@ public class Inforservice {
 	@SuppressWarnings("rawtypes")
 	public List<InformationRating> lstInfor1(int partner) {
 		List<InformationRating> lst = new ArrayList<>();
-		String temp ="";
-		if(partner == 1){
+		String temp = "";
+		if (partner == 1) {
 			temp = "(select MIN(room.price) from Room room where room.information.id = e.id)";
-		}else{
+		} else {
 			temp = "(select MIN(room.price) from Food  room where room.information.id = e.id)";
 		}
 		try {
-			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating,"
-					+ temp+"as price "
-					+ "from Information e where e.partner = " + partner +"ORDER BY rating DESC";
+			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
+					+ "as price " + "from Information e where e.partner = " + partner + "ORDER BY rating DESC";
 			// String str = "select COUNT(*) from Rating r where
 			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
-	//			query.setFirstResult(0);
-	//			query.setMaxResults(10);
+			// query.setFirstResult(0);
+			// query.setMaxResults(10);
 			List<Object> result = query.list();
 			result = query.list();
 			Iterator itr = result.iterator();
@@ -347,9 +551,9 @@ public class Inforservice {
 				Long rating = 0L;
 				Long price = 0L;
 				try {
-					 rating = (Long) obj[1];
-					 price = Long.parseLong(String.valueOf(obj[2]));
-					
+					rating = (Long) obj[1];
+					price = Long.parseLong(String.valueOf(obj[2]));
+
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -357,34 +561,33 @@ public class Inforservice {
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.out.println(ex + "ddddddddddddddddddddddddddddddddddddddddd");
+			System.out.println(ex + "a");
 		}
 		return lst;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
-	public List<InformationRating> searchProvinces(int partner,String name){
+	public List<InformationRating> searchProvinces(int partner, String name) {
 		List<InformationRating> list = new ArrayList<>();
-		String temp ="";
-		if(partner == 1){
+		String temp = "";
+		if (partner == 1) {
 			temp = "(select MIN(room.price) from Room room where room.information.id = e.id)";
-		}else{
+		} else {
 			temp = "(select MIN(room.price) from Food  room where room.information.id = e.id)";
 		}
 		try {
-			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating,"
-					+ temp+"as price "
-					+ "from Information e where e.partner = " + partner +" and e.province like :name";
+			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
+					+ "as price " + "from Information e where e.partner = " + partner + " and e.province like :name";
 			// String str = "select COUNT(*) from Rating r where
 			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
-			
+
 			Query query = (Query) session.createQuery(str);
-			query.setParameter("name","%"+name+"%");
-	//			query.setFirstResult(0);
-	//			query.setMaxResults(10);
+			query.setParameter("name", "%" + name + "%");
+			// query.setFirstResult(0);
+			// query.setMaxResults(10);
 			List<Object> result = query.list();
-			
+
 			result = query.list();
 			Iterator itr = result.iterator();
 			while (itr.hasNext()) {
@@ -393,9 +596,9 @@ public class Inforservice {
 				Long rating = 0L;
 				Long price = 0L;
 				try {
-					 rating = (Long) obj[1];
-					 price = Long.parseLong(String.valueOf(obj[2]));
-					
+					rating = (Long) obj[1];
+					price = Long.parseLong(String.valueOf(obj[2]));
+
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -403,34 +606,34 @@ public class Inforservice {
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.out.println(ex + "ddddddddddddddddddddddddddddddddddddddddd");
+			System.out.println(ex + "");
 		}
-		
+
 		return list;
 	}
+
 	@SuppressWarnings("rawtypes")
-	public List<InformationRating> searchName(int partner,String name){
+	public List<InformationRating> searchName(int partner, String name) {
 		List<InformationRating> list = new ArrayList<>();
-		String temp ="";
-		if(partner == 1){
+		String temp = "";
+		if (partner == 1) {
 			temp = "(select MIN(room.price) from Room room where room.information.id = e.id)";
-		}else{
+		} else {
 			temp = "(select MIN(room.price) from Food  room where room.information.id = e.id)";
 		}
 		try {
-			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating,"
-					+ temp+"as price "
-					+ "from Information e where e.partner = " + partner +" and e.name like :name";
+			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
+					+ "as price " + "from Information e where e.partner = " + partner + " and e.name like :name";
 			// String str = "select COUNT(*) from Rating r where
 			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
-			
+
 			Query query = (Query) session.createQuery(str);
-			query.setParameter("name","%"+name+"%");
-	//			query.setFirstResult(0);
-	//			query.setMaxResults(10);
+			query.setParameter("name", "%" + name + "%");
+			// query.setFirstResult(0);
+			// query.setMaxResults(10);
 			List<Object> result = query.list();
-			
+
 			result = query.list();
 			Iterator itr = result.iterator();
 			while (itr.hasNext()) {
@@ -439,9 +642,9 @@ public class Inforservice {
 				Long rating = 0L;
 				Long price = 0L;
 				try {
-					 rating = (Long) obj[1];
-					 price = Long.parseLong(String.valueOf(obj[2]));
-					
+					rating = (Long) obj[1];
+					price = Long.parseLong(String.valueOf(obj[2]));
+
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -449,32 +652,28 @@ public class Inforservice {
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.out.println(ex + "ddddddddddddddddddddddddddddddddddddddddd");
+			System.out.println(ex + "");
 		}
-		
+
 		return list;
 	}
-	
-	public List<Serviceinfor> getListInforRoom(int id){
+
+	public List<Serviceinfor> getListInforRoom(int id) {
 		List<Serviceinfor> listService = null;
 		try {
 			String str = "from Serviceinfor s where s.information.id = " + id;
 			Session session = MySessionFactory.getSessionFactory().openSession();
 			Query query = session.createQuery(str);
 			listService = query.list();
-			//System.out.println(listService.size());
-			
+			// System.out.println(listService.size());
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 		return listService;
 	}
-	
-	
-	
-	
-	
+
 	public List<Information> lstInfor(int partner) {
 		List<Information> lst = new ArrayList<>();
 		try {

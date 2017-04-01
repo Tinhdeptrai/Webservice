@@ -63,7 +63,7 @@ public class Booking {
 	@Id
 
 	@Column(name = "id", unique = true, nullable = false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return this.id;
 	}

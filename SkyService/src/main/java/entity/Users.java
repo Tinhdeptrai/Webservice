@@ -134,7 +134,7 @@ public class Users {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
-
+	@Column(name = "booking", nullable = false)
 	public Set<Booking> getBookings() {
 		return this.bookings;
 	}

@@ -2,6 +2,7 @@ package resource;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,6 +14,7 @@ import services.FoodService;
 
 @Path("/food")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes("application/json")
 public class FoodResource {
 
 	private FoodService foodService = new FoodService();

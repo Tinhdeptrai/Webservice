@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,6 +27,7 @@ import services.RoomService;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes("application/json")
 public class RoomResource {
 
 	private RoomService roomService = new RoomService();
@@ -41,9 +43,9 @@ public class RoomResource {
 			@QueryParam("checkin") String dtCheckIn, @QueryParam("checkout") String dtCheckOut,
 			@QueryParam("phone") String sdt, @QueryParam("idcard") String iDcard, @QueryParam("name") String name)
 			throws ParseException, DatatypeConfigurationException {
-		Boolean bl = roomService.bookRoom(mail, loaiPhong, stringToXMLGregorianCalendar(dtCheckIn),
+		Boolean bl = roomService.bookRoomService(mail, loaiPhong, stringToXMLGregorianCalendar(dtCheckIn),
 				stringToXMLGregorianCalendar(dtCheckOut), name, sdt, iDcard);
-		
+
 		JSONObject object = new JSONObject();
 		object.put("result", String.valueOf(bl));
 		return object.toString();
@@ -63,7 +65,7 @@ public class RoomResource {
 						cal.get(Calendar.DAY_OF_MONTH), dob.getHours(), dob.getMinutes(), dob.getSeconds(),
 						DatatypeConstants.FIELD_UNDEFINED, cal.getTimeZone().LONG)
 				.normalize();
-System.out.println(xmlDate2);
+		System.out.println(xmlDate2);
 		return xmlDate2;
 	}
 

@@ -15,6 +15,9 @@ import javax.ws.rs.Path;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import entity.Users;
+import services.LoginService;
+
 @Path("/test")
 public class Test {
 
@@ -70,25 +73,30 @@ public class Test {
 		 * "thanh cong"); // } catch (ParseException e) { // // TODO
 		 * Auto-generated catch block // e.printStackTrace(); // }
 		 */
-		InputStream is = null;
-		try {
-			is = new URL("http://localhost:8080/SkyService/rest/infor/type").openStream();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-			String jsonText = readAll(rd);
-			List<String> lst = new ArrayList<>();
-
-			lst = jsonStringToArray(jsonText);
-			for (String string : lst) {
-				System.out.println("123456" + string);
-			}
-
-		} catch (Exception ex) {
-		}
+		/*
+		 * InputStream is = null; try { is = new
+		 * URL("http://localhost:8080/SkyService/rest/infor/type").openStream();
+		 * } catch (IOException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } try { BufferedReader rd = new
+		 * BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+		 * String jsonText = readAll(rd); List<String> lst = new ArrayList<>();
+		 * 
+		 * lst = jsonStringToArray(jsonText); for (String string : lst) {
+		 * System.out.println("123456" + string); }
+		 * 
+		 * } catch (Exception ex) { }
+		 */
+		
+		Users user = new Users();
+		user.setEmail("nguyenvantinh@gmail.com");
+		user.setFullname("nguyen van tinh");
+		user.setPassword("123");
+		user.setPhone("01654116641");
+		user.setPoint(1);
+		LoginService loginService = new LoginService();
+		loginService.addUser(user);
+		
+		
 	}
 
 }

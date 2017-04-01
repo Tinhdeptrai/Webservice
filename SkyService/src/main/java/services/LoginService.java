@@ -33,37 +33,45 @@ public class LoginService {
 			return null;
 
 	}
-	
-	public void getBooking(){
-		
-	}
 
-	public Boolean Registry(String email, String password, String name, String phone) {
-		List<Users> lst = new ArrayList<>();
+	public Boolean checkEmail(String email) {
+		List<Users> lst = null;
 		Session session = null;
 		try {
-			String str = "from Users E where E.email = " + "'" + email + "'";
+			String str = "from Users E where E.email = :email";
 			session = MySessionFactory.getSessionFactory().openSession();
 			Query query = (Query) session.createQuery(str);
+			query.setParameter("email", email);
 			lst = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		if (lst != null)
-			return false;
-		else {
-			Users users = new Users();
-			users.setEmail(email);
-			users.setPassword(password);
-			users.setFullname(name);
-			users.setPhone(phone);
-			users.setPoint(1);
-			session.getTransaction().begin();
-			session.saveOrUpdate(users);
-			session.getTransaction().commit();
+		if (lst.size() == 0)
 			return true;
+		else {
+			return false;
 		}
 
+	}
+
+	public Boolean addUser(Users users) {
+		Session session = null;
+		try {
+			Users user = new Users();
+			user.setEmail(users.getEmail());
+			user.setFullname(users.getFullname());
+			user.setPassword(users.getPassword());
+			user.setPhone(users.getPhone());
+			user.setPoint(users.getPoint());
+			session = MySessionFactory.getSessionFactory().openSession();
+			session.getTransaction().begin();
+			session.save(user);
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception ex) {
+			session.getTransaction().rollback();
+			return false;
+		}
 	}
 
 }
