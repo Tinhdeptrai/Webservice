@@ -10,10 +10,10 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
@@ -22,6 +22,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.json.JSONObject;
 
+import entity.Booking;
 import entity.Room;
 import services.RoomService;
 
@@ -37,15 +38,33 @@ public class RoomResource {
 		return roomService.searchRoom(inforID);
 	}
 
-	@GET
-	@Path("bookroom")
-	public String bookRoom(@QueryParam("email") String mail, @QueryParam("loaiphong") int loaiPhong,
-			@QueryParam("checkin") String dtCheckIn, @QueryParam("checkout") String dtCheckOut,
-			@QueryParam("phone") String sdt, @QueryParam("idcard") String iDcard, @QueryParam("name") String name)
-			throws ParseException, DatatypeConfigurationException {
-		Boolean bl = roomService.bookRoomService(mail, loaiPhong, stringToXMLGregorianCalendar(dtCheckIn),
-				stringToXMLGregorianCalendar(dtCheckOut), name, sdt, iDcard);
+	/*
+	 * @GET
+	 * 
+	 * @Path("bookroom") public String bookRoom(@QueryParam("email") String
+	 * mail, @QueryParam("loaiphong") int loaiPhong,
+	 * 
+	 * @QueryParam("checkin") String dtCheckIn, @QueryParam("checkout") String
+	 * dtCheckOut,
+	 * 
+	 * @QueryParam("phone") String sdt, @QueryParam("idcard") String
+	 * iDcard, @QueryParam("name") String name) throws ParseException,
+	 * DatatypeConfigurationException { Boolean bl =
+	 * roomService.bookRoomService(mail, loaiPhong,
+	 * stringToXMLGregorianCalendar(dtCheckIn),
+	 * stringToXMLGregorianCalendar(dtCheckOut), name, sdt, iDcard); JSONObject
+	 * object = new JSONObject(); object.put("result", String.valueOf(bl));
+	 * return object.toString(); }
+	 */
 
+	@POST
+	@Path("bookroom")
+	public String bookRoom(Booking booking) throws ParseException, DatatypeConfigurationException {
+		roomService.saveBookRoom(booking.getUsers(), booking.getDatein(), booking.getDateout(), booking.getRoom(),
+				booking.getQuanlity(), booking.getDetail());
+		Boolean bl = roomService.bookRoomService(booking.getUsers().getEmail(), booking.getQuanlity(),
+				stringToXMLGregorianCalendar(booking.getDatein()), stringToXMLGregorianCalendar(booking.getDateout()),
+				booking.getUsers().getFullname(), booking.getUsers().getPhone(), "0000");
 		JSONObject object = new JSONObject();
 		object.put("result", String.valueOf(bl));
 		return object.toString();
