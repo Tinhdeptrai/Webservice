@@ -22,7 +22,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.json.JSONObject;
 
-import entity.Booking;
+import entity.BookingService;
 import entity.Room;
 import services.RoomService;
 
@@ -59,12 +59,11 @@ public class RoomResource {
 
 	@POST
 	@Path("bookroom")
-	public String bookRoom(Booking booking) throws ParseException, DatatypeConfigurationException {
+	public String bookRoom(BookingService booking) throws ParseException, DatatypeConfigurationException {
 		roomService.saveBookRoom(booking.getUsers(), booking.getDatein(), booking.getDateout(), booking.getRoom(),
 				booking.getQuanlity(), booking.getDetail());
-		Boolean bl = roomService.bookRoomService(booking.getUsers().getEmail(), booking.getQuanlity(),
-				stringToXMLGregorianCalendar(booking.getDatein()), stringToXMLGregorianCalendar(booking.getDateout()),
-				booking.getUsers().getFullname(), booking.getUsers().getPhone(), "0000");
+		Boolean bl = roomService.bookRoomService(booking.getUsers(), booking.getQuanlity(),
+				stringToXMLGregorianCalendar(booking.getDatein()), stringToXMLGregorianCalendar(booking.getDateout()));
 		JSONObject object = new JSONObject();
 		object.put("result", String.valueOf(bl));
 		return object.toString();
