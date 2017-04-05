@@ -42,7 +42,7 @@ public class Users {
 	private int point;
 	@XmlElement(name = "booking")
 	private Set<Booking> bookings = new HashSet<Booking>(0);
-	
+	//@XmlElement(name = "informations")
 	private Set<Information> informations = new HashSet<Information>(0);
 
 	public Users() {

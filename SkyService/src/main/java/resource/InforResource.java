@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import entity.Information;
 import entity.InformationRating;
 import entity.Serviceinfor;
 import services.Inforservice;
@@ -161,6 +162,15 @@ public class InforResource {
 	@Path("/{InforID}/food")
 	public FoodResource getFoodResource() {
 		return new FoodResource();
+	}
+
+	@Path("/getinforfollowroom")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Information getinforfollowroom(@QueryParam("id") String id) {
+		Inforservice inforservice = new Inforservice();
+		int tamp = Integer.parseInt(id);
+		return inforservice.room(tamp);
 	}
 
 }

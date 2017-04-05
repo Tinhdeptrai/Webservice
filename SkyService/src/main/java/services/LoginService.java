@@ -13,7 +13,7 @@ import utils.MySessionFactory;
 public class LoginService {
 
 	public Users login(String email, String password) {
-
+		// System.out.println(password);
 		List<Users> lst = new ArrayList<>();
 		try {
 			String str = "from Users E where E.email = " + "'" + email + "'";
@@ -24,13 +24,19 @@ public class LoginService {
 			ex.printStackTrace();
 			return null;
 		}
-		if (lst != null)
-			if (lst.get(0).getPassword().equals(password))
-				return lst.get(0);
+		try {
+			if (lst != null)
+				if (lst.get(0).getPassword().equals(password)) {
+					// System.out.println(lst.get(0).getBookings().iterator().next().getRoom().getInformation().getName()+
+					// " size booking");
+					return lst.get(0);
+				} else
+					return null;
 			else
 				return null;
-		else
+		} catch (Exception e) {
 			return null;
+		}
 
 	}
 
