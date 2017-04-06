@@ -48,10 +48,10 @@ public class GROUPROOM {
     protected int id;
     @XmlElement(name = "TYPEROOM")
     protected String typeroom;
-    @XmlElement(name = "PRICE", required = true, type = Integer.class, nillable = true)
-    protected Integer price;
-    @XmlElement(name = "QUANTITY", required = true, type = Integer.class, nillable = true)
-    protected Integer quantity;
+    @XmlElement(name = "PRICE")
+    protected int price;
+    @XmlElement(name = "QUANTITY")
+    protected int quantity;
     @XmlElement(name = "IMAGE")
     protected String image;
     @XmlElement(name = "BOOKROOMs")
@@ -102,48 +102,32 @@ public class GROUPROOM {
     /**
      * Gets the value of the price property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
      */
-    public Integer getPRICE() {
+    public int getPRICE() {
         return price;
     }
 
     /**
      * Sets the value of the price property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
      */
-    public void setPRICE(Integer value) {
+    public void setPRICE(int value) {
         this.price = value;
     }
 
     /**
      * Gets the value of the quantity property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
      */
-    public Integer getQUANTITY() {
+    public int getQUANTITY() {
         return quantity;
     }
 
     /**
      * Sets the value of the quantity property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
      */
-    public void setQUANTITY(Integer value) {
+    public void setQUANTITY(int value) {
         this.quantity = value;
     }
 

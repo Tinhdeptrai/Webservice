@@ -62,6 +62,23 @@ public interface WebServiceSoap {
 
     /**
      * 
+     * @param dtOut
+     * @param dtIn
+     * @return
+     *     returns org.tempuri.ArrayOfInforReRoom
+     */
+    @WebMethod(action = "http://tempuri.org/getRoom")
+    @WebResult(name = "getRoomResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "getRoom", targetNamespace = "http://tempuri.org/", className = "org.tempuri.GetRoom")
+    @ResponseWrapper(localName = "getRoomResponse", targetNamespace = "http://tempuri.org/", className = "org.tempuri.GetRoomResponse")
+    public ArrayOfInforReRoom getRoom(
+        @WebParam(name = "dtIn", targetNamespace = "http://tempuri.org/")
+        XMLGregorianCalendar dtIn,
+        @WebParam(name = "dtOut", targetNamespace = "http://tempuri.org/")
+        XMLGregorianCalendar dtOut);
+
+    /**
+     * 
      * @param loaiPhong
      * @param dtOut
      * @param dtIn
@@ -74,7 +91,7 @@ public interface WebServiceSoap {
     @ResponseWrapper(localName = "remainingRoomNumberResponse", targetNamespace = "http://tempuri.org/", className = "org.tempuri.RemainingRoomNumberResponse")
     public int remainingRoomNumber(
         @WebParam(name = "loaiPhong", targetNamespace = "http://tempuri.org/")
-        int loaiPhong,
+        String loaiPhong,
         @WebParam(name = "dtIn", targetNamespace = "http://tempuri.org/")
         XMLGregorianCalendar dtIn,
         @WebParam(name = "dtOut", targetNamespace = "http://tempuri.org/")
@@ -117,7 +134,7 @@ public interface WebServiceSoap {
         @WebParam(name = "mail", targetNamespace = "http://tempuri.org/")
         String mail,
         @WebParam(name = "LoaiPhong", targetNamespace = "http://tempuri.org/")
-        int loaiPhong,
+        String loaiPhong,
         @WebParam(name = "dtCheckIn", targetNamespace = "http://tempuri.org/")
         XMLGregorianCalendar dtCheckIn,
         @WebParam(name = "dtCheckOut", targetNamespace = "http://tempuri.org/")

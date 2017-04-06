@@ -21,7 +21,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="mail" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="LoaiPhong" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="LoaiPhong" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="dtCheckIn" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="dtCheckOut" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *       &lt;/sequence>
@@ -44,7 +44,7 @@ public class SetBookRoom {
 
     protected String mail;
     @XmlElement(name = "LoaiPhong")
-    protected int loaiPhong;
+    protected String loaiPhong;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dtCheckIn;
@@ -79,16 +79,24 @@ public class SetBookRoom {
     /**
      * Gets the value of the loaiPhong property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getLoaiPhong() {
+    public String getLoaiPhong() {
         return loaiPhong;
     }
 
     /**
      * Sets the value of the loaiPhong property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setLoaiPhong(int value) {
+    public void setLoaiPhong(String value) {
         this.loaiPhong = value;
     }
 

@@ -11,6 +11,8 @@ import org.hibernate.Session;
 import entity.Booking;
 import entity.Room;
 import entity.Users;
+import soapservice.ArrayOfInforReRoom;
+import soapservice.InforReRoom;
 import soapservice.WebService;
 import soapservice.WebServiceSoap;
 import utils.MySessionFactory;
@@ -29,10 +31,9 @@ public class RoomService {
 			ex.printStackTrace();
 		}
 		return lst;
-
 	}
 
-	public Boolean bookRoomService(int idUser, int loaiPhong, XMLGregorianCalendar dtCheckIn,
+	public Boolean bookRoomService(int idUser, String loaiPhong, XMLGregorianCalendar dtCheckIn,
 			XMLGregorianCalendar dtCheckOut) {
 		Session session = MySessionFactory.getSessionFactory().openSession();
 		List<Users> lstUser = new ArrayList<>();
@@ -61,7 +62,6 @@ public class RoomService {
 		String strLstUser = "from Users E where E.id = " + idUser;
 		Query query2 = session.createQuery(strLstUser);
 		lstUser = query2.list();
-
 		Booking booking = new Booking();
 		booking.setDatein(dtCheckIn);
 		booking.setDateout(dtCheckOut);
@@ -69,7 +69,16 @@ public class RoomService {
 		booking.setQuanlity(quanlity);
 		booking.setRoom(lstRoom.get(0));
 		booking.setUsers(lstUser.get(0));
+	}
 
+	public List<InforReRoom> checkRoom(XMLGregorianCalendar dtIn, XMLGregorianCalendar dtOut) {
+		WebService webService = new WebService();
+		WebServiceSoap serviceSoap = webService.getWebServiceSoap();
+		ArrayOfInforReRoom arrayOfGROUPROOM = serviceSoap.getRoom(dtIn, dtOut);
+		List<InforReRoom> lst = new ArrayList<>();
+		lst = arrayOfGROUPROOM.getInforReRoom();
+		System.out.println("list checkroom"+ lst.get(0).getTyperoom());
+		return lst;
 	}
 
 }

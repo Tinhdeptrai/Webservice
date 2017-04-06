@@ -448,14 +448,13 @@ public class Inforservice {
 
 		Information information = new Information();
 		InforHotel hotel = serviceSoap.myName();
-		// information.setHotline(hotel.getHotline());
-		information.setHotline("01654116641");
-		System.out.println("sdt " + hotel.getHotline());
+		information.setHotline(hotel.getHotline());
 		information.setName(hotel.getName());
-
-		// information.setTimeopen(stringToDate(hotel.getTimeopen()));
-		System.out.println(stringToDate(hotel.getTimeclose()));
-		// information.setTimeclose(stringToDate(hotel.getTimeclose()));
+		//information.setTimeopen(hotel.getTimeopen());
+		// System.out.println(stringToDate(hotel.getTimeclose()));
+		// System.out.println(hotel.getTimeclose());
+		// System.out.println(hotel.getTimeopen());
+		//information.setTimeclose(hotel.getTimeclose());
 		information.setType(hotel.getType());
 		information.setIntro(hotel.getIntro());
 		information.setNumber(hotel.getNumber());

@@ -80,4 +80,15 @@ public class LoginService {
 		}
 	}
 
+	public List<Users> getListUser() {
+
+		List<Users> lstUser = new ArrayList<>();
+
+		String str = "from Users";
+		Session session = MySessionFactory.getSessionFactory().openSession();
+		Query query = session.createQuery(str);
+		lstUser = query.list();
+		return lstUser;
+	}
+
 }

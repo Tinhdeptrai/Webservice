@@ -110,6 +110,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetRoom }
+     * 
+     */
+    public GetRoom createGetRoom() {
+        return new GetRoom();
+    }
+
+    /**
      * Create an instance of {@link SetInforCustomer }
      * 
      */
@@ -123,6 +131,22 @@ public class ObjectFactory {
      */
     public LstService createLstService() {
         return new LstService();
+    }
+
+    /**
+     * Create an instance of {@link GetRoomResponse }
+     * 
+     */
+    public GetRoomResponse createGetRoomResponse() {
+        return new GetRoomResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfInforReRoom }
+     * 
+     */
+    public ArrayOfInforReRoom createArrayOfInforReRoom() {
+        return new ArrayOfInforReRoom();
     }
 
     /**
@@ -171,6 +195,14 @@ public class ObjectFactory {
      */
     public BOOKROOM createBOOKROOM() {
         return new BOOKROOM();
+    }
+
+    /**
+     * Create an instance of {@link InforReRoom }
+     * 
+     */
+    public InforReRoom createInforReRoom() {
+        return new InforReRoom();
     }
 
     /**

@@ -48,6 +48,7 @@ public class Information {
 	private String timeopen;
 
 	private String timeclose;
+	
 	@XmlElement(name = "type")
 	private String type;
 	@XmlElement(name = "intro")
@@ -156,8 +157,8 @@ public class Information {
 	 * 
 	 * @Temporal(TemporalType.TIME)
 	 */
-	@XmlElement(name = "timeopen")
-	@Column(name = "timeopen", nullable = false, length = 5)
+	/*@XmlElement(name = "timeopen")
+	@Column(name = "timeopen", nullable = true, length = 5)
 	public String getTimeopen() {
 		// SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
 		// try {
@@ -173,10 +174,15 @@ public class Information {
 		String part2 = parts[1];
 		timeopen = part1 + ":" + part2;
 		return timeopen;
-	}
+	}*/
 
 	public void setTimeopen(String timeopen) {
 		this.timeopen = timeopen;
+	}
+	@XmlElement(name = "timeopen")
+	@Column(name = "timeopen", nullable = true, length = 5)
+	public String getTimeopen() {
+		return timeopen;
 	}
 
 	/*
@@ -187,7 +193,7 @@ public class Information {
 	 * @Temporal(TemporalType.TIME)
 	 */
 	@XmlElement(name = "timeclose")
-	@Column(name = "timeclose", nullable = false, length = 5)
+	@Column(name = "timeclose", nullable = true, length = 5)
 	public String getTimeclose() {
 		// SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
 		// try {
