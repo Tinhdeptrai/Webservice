@@ -89,6 +89,7 @@ public class testgettoken {
 			Client client = Client.create();
 			WebResource webResource = client.resource(
 					"http://localhost:8080/SkyService/rest/bookroom" + QPM_ACCESS_TOKEN + authTokenInfo.getAccess_token());
+			System.out.println("http://localhost:8080/SkyService/rest/room/bookroom" + QPM_ACCESS_TOKEN + authTokenInfo.getAccess_token());
 			Gson gson = new Gson();
 
 			BookingService bookingService = new BookingService();
