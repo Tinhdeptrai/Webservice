@@ -31,7 +31,7 @@ import entity.Room;
 import services.RoomService;
 import soapservice.InforReRoom;
 
-@Path("/")
+@Path("/room")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes("application/json")
 public class RoomResource {
