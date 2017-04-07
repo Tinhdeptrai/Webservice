@@ -103,11 +103,14 @@ public interface WebServiceSoap {
      * @param iDcard
      * @param mail
      * @param name
+     * @return
+     *     returns boolean
      */
     @WebMethod(action = "http://tempuri.org/setInforCustomer")
+    @WebResult(name = "setInforCustomerResult", targetNamespace = "http://tempuri.org/")
     @RequestWrapper(localName = "setInforCustomer", targetNamespace = "http://tempuri.org/", className = "org.tempuri.SetInforCustomer")
     @ResponseWrapper(localName = "setInforCustomerResponse", targetNamespace = "http://tempuri.org/", className = "org.tempuri.SetInforCustomerResponse")
-    public void setInforCustomer(
+    public boolean setInforCustomer(
         @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
         String name,
         @WebParam(name = "mail", targetNamespace = "http://tempuri.org/")

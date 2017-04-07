@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
 	private static final String RESOURCE_ID = "my_rest_api";
-
+	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) {
 		resources.resourceId(RESOURCE_ID).stateless(false);
@@ -20,10 +20,12 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.anonymous().disable().requestMatchers().antMatchers("/rest/room/bookroom").and().authorizeRequests()
-				.antMatchers("/rest/room/bookroom").access("hasRole('ADMIN')").and().exceptionHandling()
-				.accessDeniedHandler(new OAuth2AccessDeniedHandler());
-
+		http.
+		anonymous().disable()
+		.requestMatchers().antMatchers("/rest/room/booking")
+		.and().authorizeRequests()
+		.antMatchers("/rest/room/booking").access("hasRole('ADMIN')")
+		.and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 
 }

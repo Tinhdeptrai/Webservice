@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "security")
-public class HelloWorldConfiguration {
+public class SkyServiceConfiguration {
 	
 
 }

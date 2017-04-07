@@ -91,4 +91,20 @@ public class LoginService {
 		return lstUser;
 	}
 
+	public Boolean updataUser(Users user) {
+
+		Session session = MySessionFactory.getSessionFactory().openSession();
+		try {
+			session.beginTransaction().begin();
+			session.saveOrUpdate(user);
+			session.beginTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.beginTransaction().rollback();
+			return false;
+		}
+
+	}
+
 }

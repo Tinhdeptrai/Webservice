@@ -16,6 +16,9 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="setInforCustomerResult" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -24,9 +27,28 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
+@XmlType(name = "", propOrder = {
+    "setInforCustomerResult"
+})
 @XmlRootElement(name = "setInforCustomerResponse")
 public class SetInforCustomerResponse {
 
+    protected boolean setInforCustomerResult;
+
+    /**
+     * Gets the value of the setInforCustomerResult property.
+     * 
+     */
+    public boolean isSetInforCustomerResult() {
+        return setInforCustomerResult;
+    }
+
+    /**
+     * Sets the value of the setInforCustomerResult property.
+     * 
+     */
+    public void setSetInforCustomerResult(boolean value) {
+        this.setInforCustomerResult = value;
+    }
 
 }

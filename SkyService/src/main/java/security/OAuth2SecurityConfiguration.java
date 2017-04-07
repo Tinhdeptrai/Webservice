@@ -26,7 +26,6 @@ import services.LoginService;
 public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	static LoginService loginService = new LoginService();
 	private static List<Users> lstUser = loginService.getListUser();
-
 	@Autowired
 	private ClientDetailsService clientDetailsService;
 
@@ -41,7 +40,6 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().anonymous().disable().authorizeRequests().antMatchers("/oauth/token").permitAll();
-
 	}
 
 	@Override

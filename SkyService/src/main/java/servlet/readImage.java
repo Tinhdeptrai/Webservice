@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 public class readImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	public readImage() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -29,15 +28,17 @@ public class readImage extends HttpServlet {
 			throws ServletException, IOException {
 
 		String pathInfo = request.getPathInfo();
-		String[] pathParts = pathInfo.split("/");
-		String part = pathParts[1];
-		response.setContentType("image/jpg");
+		// String[] pathParts = pathInfo.split("/");
+		/*
+		 * String part = pathParts[1]; response.setContentType("image/jpg");
+		 */
 
 		String pathToWeb = getServletContext().getRealPath(File.separator);
-		System.out.println(pathToWeb);
-		File f = new File(pathToWeb + "/image/" + part);
+		//System.out.println(pathToWeb);
+		File f = new File(pathToWeb + "/image" + pathInfo);
 		BufferedImage bi = ImageIO.read(f);
 		OutputStream out = response.getOutputStream();
+		response.setContentType("image/jpg,image/gif,image/png,image/JPG");
 		ImageIO.write(bi, "jpg", out);
 		out.close();
 	}

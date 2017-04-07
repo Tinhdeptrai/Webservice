@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
+
 import entity.BookingService;
 import entity.Room;
 import services.RoomService;
@@ -67,13 +68,15 @@ public class RoomResource {
 	public String bookRoom(BookingService booking) throws ParseException, DatatypeConfigurationException {
 		roomService.saveBookRoom(booking.getUsers(), booking.getDatein(), booking.getDateout(), booking.getRoom(),
 				booking.getQuanlity(), booking.getDetail());
-		System.out.println("date" + booking.getDatein());
-		Boolean bl = roomService.bookRoomService(booking.getUsers(), booking.getDetail(),
+
+		Boolean bl = roomService.bookRoomService(booking.getUsers(), booking.getRoom(),
 				stringToXMLGregorianCalendar(booking.getDatein()), stringToXMLGregorianCalendar(booking.getDateout()));
 
-		 roomService.saveBookRoom(booking.getUsers(), booking.getDatein(),
-		 booking.getDateout(), booking.getRoom(),
-		 booking.getQuanlity(), booking.getDetail());
+		/*
+		 * roomService.saveBookRoom(booking.getUsers(), booking.getDatein(),
+		 * booking.getDateout(), booking.getRoom(), booking.getQuanlity(),
+		 * booking.getDetail());
+		 */
 		JSONObject object = new JSONObject();
 
 		object.put("result", String.valueOf(bl));
