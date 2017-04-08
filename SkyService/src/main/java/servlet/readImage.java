@@ -28,10 +28,6 @@ public class readImage extends HttpServlet {
 			throws ServletException, IOException {
 
 		String pathInfo = request.getPathInfo();
-		// String[] pathParts = pathInfo.split("/");
-		/*
-		 * String part = pathParts[1]; response.setContentType("image/jpg");
-		 */
 
 		String pathToWeb = getServletContext().getRealPath(File.separator);
 		//System.out.println(pathToWeb);
