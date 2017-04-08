@@ -44,25 +44,7 @@ public class RoomResource {
 		return roomService.searchRoom(inforID);
 	}
 
-	/*
-	 * @GET
-	 * 
-	 * @Path("bookroom") public String bookRoom(@QueryParam("email") String
-	 * mail, @QueryParam("loaiphong") int loaiPhong,
-	 * 
-	 * @QueryParam("checkin") String dtCheckIn, @QueryParam("checkout") String
-	 * dtCheckOut,
-	 * 
-	 * @QueryParam("phone") String sdt, @QueryParam("idcard") String
-	 * iDcard, @QueryParam("name") String name) throws ParseException,
-	 * DatatypeConfigurationException { Boolean bl =
-	 * roomService.bookRoomService(mail, loaiPhong,
-	 * stringToXMLGregorianCalendar(dtCheckIn),
-	 * stringToXMLGregorianCalendar(dtCheckOut), name, sdt, iDcard); JSONObject
-	 * object = new JSONObject(); object.put("result", String.valueOf(bl));
-	 * return object.toString(); }
-	 */
-
+	
 	@POST
 	@Path("bookroom")
 	public String bookRoom(BookingService booking) throws ParseException, DatatypeConfigurationException {
@@ -72,11 +54,6 @@ public class RoomResource {
 		Boolean bl = roomService.bookRoomService(booking.getUsers(), booking.getRoom(),
 				stringToXMLGregorianCalendar(booking.getDatein()), stringToXMLGregorianCalendar(booking.getDateout()));
 
-		/*
-		 * roomService.saveBookRoom(booking.getUsers(), booking.getDatein(),
-		 * booking.getDateout(), booking.getRoom(), booking.getQuanlity(),
-		 * booking.getDetail());
-		 */
 		JSONObject object = new JSONObject();
 
 		object.put("result", String.valueOf(bl));

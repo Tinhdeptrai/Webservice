@@ -10,6 +10,9 @@ import org.hibernate.Session;
 import entity.DetailInfor;
 import entity.Information;
 import entity.Rating;
+
+import entity.RatingId;
+import entity.Users;
 import utils.MySessionFactory;
 
 public class ratingService {
@@ -71,6 +74,56 @@ public class ratingService {
 		}
 
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Boolean like(RatingId ratingId) {
+
+		Session session = MySessionFactory.getSessionFactory().openSession();
+
+		List<Users> lstUser = new ArrayList<>();
+		String strUser = "from Users E where E.id =" + ratingId.getUsers();
+		lstUser = session.createQuery(strUser).list();
+
+		List<Information> lstInfor = new ArrayList<>();
+		String strInfor = "from Information E where E.id =" + ratingId.getInfor();
+		lstInfor = session.createQuery(strInfor).list();
+		Rating rating = new Rating(ratingId, lstInfor.get(0), lstUser.get(0));
+		try {
+			session.beginTransaction().begin();
+			session.saveOrUpdate(rating);
+			session.beginTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			session.beginTransaction().rollback();
+			return false;
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public Boolean unLike(RatingId ratingId) {
+
+		Session session = MySessionFactory.getSessionFactory().openSession();
+
+		List<Users> lstUser = new ArrayList<>();
+		String strUser = "from Users E where E.id =" + ratingId.getUsers();
+		lstUser = session.createQuery(strUser).list();
+
+		List<Information> lstInfor = new ArrayList<>();
+		String strInfor = "from Information E where E.id =" + ratingId.getInfor();
+		lstInfor = session.createQuery(strInfor).list();
+		Rating rating = new Rating(ratingId, lstInfor.get(0), lstUser.get(0));
+		try {
+			session.beginTransaction().begin();
+			session.delete(rating);
+			session.beginTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			session.beginTransaction().rollback();
+			return false;
+		}
+
 	}
 
 }
