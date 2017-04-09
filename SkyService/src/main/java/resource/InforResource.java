@@ -1,5 +1,6 @@
 package resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -8,6 +9,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import entity.Information;
 import entity.InformationRating;
@@ -67,7 +71,18 @@ public class InforResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String search() {
 		Inforservice inforservice = new Inforservice();
-		return inforservice.listType();
+		ArrayList<String> strList = inforservice.listType();
+		JSONArray array_s = new JSONArray();
+
+		for (String string : strList) {
+			JSONObject object1 = new JSONObject();
+			object1.put("result", String.valueOf(string));
+			array_s.put(object1);
+		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("type", array_s);
+		return jsonObject.toString();
+
 	}
 
 	/*
@@ -152,6 +167,18 @@ public class InforResource {
 			return inforservice.searchType(partner, type);
 		} else
 			return inforservice.searchDistrictAndProvinceAndType(partner, province, distric, type);
+	}
+
+	@Path("/searchmoney")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<InformationRating> searchMone(@QueryParam("partner") String partner,
+			@QueryParam("pricestart") String priceStart, @QueryParam("priceend") String priceEnd) {
+		Inforservice inforservice = new Inforservice();
+		int partnerInt = Integer.parseInt(partner);
+		int priceStartInt = Integer.parseInt(priceStart);
+		int priceEndInt = Integer.parseInt(priceEnd);
+		return inforservice.searchMoney(partnerInt, priceStartInt, priceEndInt);
 	}
 
 	@Path("/{InforID}/room")

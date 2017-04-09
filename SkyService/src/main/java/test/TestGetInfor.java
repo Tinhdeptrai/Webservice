@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Session;
 
-import entity.Information;
 import entity.Users;
 import utils.MySessionFactory;
  

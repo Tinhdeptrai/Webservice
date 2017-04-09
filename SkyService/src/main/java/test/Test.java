@@ -1,12 +1,5 @@
 package test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.TimeZone;
 
 import javax.ws.rs.Path;
@@ -26,9 +18,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import entity.Users;
-import services.LoginService;
-import services.RoomService;
 import soapservice.WebService;
 import soapservice.WebServiceSoap;
 
@@ -48,14 +37,14 @@ public class Test {
 		return stringArray;
 	}
 
-	private static String readAll(Reader rd) throws IOException {
+	/*private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
 		while ((cp = rd.read()) != -1) {
 			sb.append((char) cp);
 		}
 		return sb.toString();
-	}
+	}*/
 	@SuppressWarnings({ "static-access", "deprecation" })
 	public static XMLGregorianCalendar stringToXMLGregorianCalendar(String str)
 			throws ParseException, DatatypeConfigurationException {

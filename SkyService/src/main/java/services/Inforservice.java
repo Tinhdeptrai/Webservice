@@ -1,6 +1,5 @@
 package services;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -363,18 +361,18 @@ public class Inforservice {
 		List<Information> lst = new ArrayList<>();
 		try {
 			Session session = MySessionFactory.getSessionFactory().openSession();
-			lst = session.createCriteria(Information.class).list();
+			lst = session.createQuery("from Information E where E.partner = 2 ").list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return lst;
 	}
 
-	public String listType() {
+	public ArrayList<String> listType() {
 		ArrayList<String> lst = new ArrayList<>();
 		List<Information> lstInfor = new ArrayList<>();
 		lstInfor = listAllInfor();
-		String result = null;
+
 		try {
 			for (Information information : lstInfor) {
 				lst.add(information.getType());
@@ -384,16 +382,7 @@ public class Inforservice {
 		}
 		removeDuplicate(lst);
 
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-
-			result = mapper.writeValueAsString(lst);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return result;
+		return lst;
 	}
 
 	public static ArrayList<String> removeDuplicate(ArrayList<String> arrList) {
@@ -450,11 +439,11 @@ public class Inforservice {
 		InforHotel hotel = serviceSoap.myName();
 		information.setHotline(hotel.getHotline());
 		information.setName(hotel.getName());
-		//information.setTimeopen(hotel.getTimeopen());
+		// information.setTimeopen(hotel.getTimeopen());
 		// System.out.println(stringToDate(hotel.getTimeclose()));
 		// System.out.println(hotel.getTimeclose());
 		// System.out.println(hotel.getTimeopen());
-		//information.setTimeclose(hotel.getTimeclose());
+		// information.setTimeclose(hotel.getTimeclose());
 		information.setType(hotel.getType());
 		information.setIntro(hotel.getIntro());
 		information.setNumber(hotel.getNumber());
@@ -636,6 +625,19 @@ public class Inforservice {
 		}
 
 		return list;
+	}
+
+	public List<InformationRating> searchMoney(int partner, int priceStar, int priceEnd) {
+
+		List<InformationRating> lst = lstInfor1(partner);
+		List<InformationRating> lstMoney = new ArrayList<>();
+		for (InformationRating informationRating : lst) {
+			if (informationRating.getPricte() >= priceStar && informationRating.getPricte() <= priceEnd) {
+				lstMoney.add(informationRating);
+			}
+		}
+		return lstMoney;
+
 	}
 
 	public List<Serviceinfor> getListInforRoom(int id) {
