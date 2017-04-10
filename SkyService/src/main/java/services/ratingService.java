@@ -12,6 +12,7 @@ import entity.Information;
 import entity.Rating;
 
 import entity.RatingId;
+import entity.Service;
 import entity.Users;
 import utils.MySessionFactory;
 
@@ -30,12 +31,42 @@ public class ratingService {
 		return 0;
 	}
 
+/*	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<Service> getListService(int infor) {
+		List<Service> lstService = new ArrayList<>();
+		String strService1 = "select S.service.id, S.service.name, S.service.icon from Serviceinfor S where S.information = "+ infor;
+		
+		Session session = MySessionFactory.getSessionFactory().openSession();
+		
+		Query query = (Query) session.createQuery(strService1);
+		
+		List<Object> result = query.list();
+
+		result = query.list();
+		
+		Iterator itr = result.iterator();
+		while (itr.hasNext()) {
+			Object[] obj = (Object[]) itr.next();
+			int  id = (int) obj[0];
+			String name  = (String) obj[1];
+			String icon = (String) obj[2];			
+			
+			lstService.add(new Service(id,name,icon));
+		}
+		
+		return lstService;
+
+	}*/
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<DetailInfor> detailInfor(int partner, int id, int idUser) {
+
+		Session session = MySessionFactory.getSessionFactory().openSession();
 		int status = -1;
 		if (idUser != 0) {
 			status = checkRating(id, idUser);
 		}
+
 
 		List<DetailInfor> list = new ArrayList<>();
 		String temp = "";
@@ -47,7 +78,6 @@ public class ratingService {
 		try {
 			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
 					+ "as price " + "from Information e where e.partner = " + partner + " and e.id = " + id;
-			Session session = MySessionFactory.getSessionFactory().openSession();
 
 			Query query = (Query) session.createQuery(str);
 

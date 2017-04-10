@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import entity.Booking;
 import entity.Users;
 import utils.MySessionFactory;
 
@@ -24,11 +25,15 @@ public class LoginService {
 			ex.printStackTrace();
 			return null;
 		}
+		
 		try {
 			if (lst != null)
 				if (lst.get(0).getPassword().equals(password)) {
 					// System.out.println(lst.get(0).getBookings().iterator().next().getRoom().getInformation().getName()+
 					// " size booking");
+					for (Booking booking : lst.get(0).getBookings()) {
+						System.out.println("infor aaaa"+booking.getRoom().getInformation().getName());	
+					}
 					return lst.get(0);
 				} else
 					return null;
@@ -42,6 +47,8 @@ public class LoginService {
 
 	public Boolean checkEmail(String email) {
 		List<Users> lst = null;
+		
+		
 		Session session = null;
 		try {
 			String str = "from Users E where E.email = :email";
@@ -52,6 +59,9 @@ public class LoginService {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		
+	
+		
 		if (lst.size() == 0)
 			return true;
 		else {

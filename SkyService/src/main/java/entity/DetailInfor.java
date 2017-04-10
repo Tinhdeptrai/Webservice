@@ -17,6 +17,7 @@ public class DetailInfor {
 	@XmlElement(name = "status")
 	private int status;
 
+	
 	public DetailInfor() {
 		super();
 	}
@@ -29,6 +30,10 @@ public class DetailInfor {
 		this.status = status;
 	}
 
+	
+	
+	
+	
 	public Information getInformation() {
 		return information;
 	}
@@ -59,6 +64,8 @@ public class DetailInfor {
 
 	public void setStatus(int status) {
 		this.status = status;
-	};
+	}
 
+	
+	
 }

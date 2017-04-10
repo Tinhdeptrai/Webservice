@@ -1,15 +1,11 @@
 package test;
 
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import entity.BookingService;
 import entity.RatingId;
-import services.ratingService;
 
 public class testlikeUnlike {
 

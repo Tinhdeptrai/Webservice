@@ -32,6 +32,8 @@ public class Service {
 	private int id;
 	@XmlElement(name = "name")
 	private String name;
+	@XmlElement(name = "icon")
+	private String icon;
 	private Set<Information> informations = new HashSet<Information>(0);
 
 	public Service() {
@@ -47,8 +49,23 @@ public class Service {
 		this.informations = informations;
 	}
 
-	@Id
+	
+	public Service(int id, String name, String icon) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.icon = icon;
+	}
 
+	public Service(int id, String name, String icon, Set<Information> informations) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.icon = icon;
+		this.informations = informations;
+	}
+
+	@Id
 	@Column(name = "id", unique = true, nullable = false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {
@@ -59,6 +76,8 @@ public class Service {
 		this.id = id;
 	}
 
+	
+	
 	@Column(name = "name")
 	public String getName() {
 		return this.name;
@@ -66,6 +85,18 @@ public class Service {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+	
+	
+	@Column(name = "icon")
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
