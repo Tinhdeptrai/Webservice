@@ -1,7 +1,6 @@
 package entity;
 // Generated Mar 24, 2017 7:27:14 PM by Hibernate Tools 4.3.1.Final
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,38 +23,97 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement(name = "room")
 @Entity
 @Table(name = "ROOM")
-//@XmlAccessorType(XmlAccessType.NONE)
+// @XmlAccessorType(XmlAccessType.NONE)
 public class Room {
-	//@XmlElement(name = "id")
+	// @XmlElement(name = "id")
 	private int id;
-	//@XmlElement(name = "information")
+	// @XmlElement(name = "information")
 	private Information information;
-	//@XmlElement(name = "type")
+	// @XmlElement(name = "type")
 	private String type;
-	//@XmlElement(name = "detail")
+	// @XmlElement(name = "detail")
 	private String detail;
-	//@XmlElement(name = "quanlity")
+	// @XmlElement(name = "quanlity")
 	private int quanlity;
-	//@XmlElement(name = "image")
+	// @XmlElement(name = "image")
 	private String image;
-	//@XmlElement(name = "maxpeople")
+	// @XmlElement(name = "maxpeople")
 	private int maxpeople;
-	//@XmlElement(name = "price")
+	// @XmlElement(name = "price")
 	private int price;
-	
+
 	private Set<Booking> bookings = new HashSet<Booking>(0);
 
-/*	private String inforName = information.getName();
+	// not entity
+
+	private String name;
+	private String hotline;
+	private String number;
+	private String ward;
+	private String street;
+	private String district;
+	private String province;
+
 	
-
-	public String getInforName() {
-		return inforName;
+	
+	public String getHotline() {
+		return hotline;
 	}
 
-	public void setInforName(String inforName) {
-		this.inforName = inforName;
+	public void setHotline(String hotline) {
+		this.hotline = hotline;
 	}
-*/
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getWard() {
+		return ward;
+	}
+
+	public void setWard(String ward) {
+		this.ward = ward;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+
+
 	public Room() {
 	}
 
@@ -67,8 +125,8 @@ public class Room {
 		this.price = price;
 	}
 
-	public Room(int id, Information information, String type, String detail, int quanlity,
-			int maxpeople, int price, Set<Booking> bookings, String image) {
+	public Room(int id, Information information, String type, String detail, int quanlity, int maxpeople, int price,
+			Set<Booking> bookings, String image) {
 		this.id = id;
 		this.information = information;
 		this.type = type;
@@ -82,7 +140,7 @@ public class Room {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -107,9 +165,11 @@ public class Room {
 	public String getType() {
 		return this.type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	@Column(name = "image", nullable = false)
 	public String getImage() {
 		return image;
@@ -118,8 +178,6 @@ public class Room {
 	public void setImage(String image) {
 		this.image = image;
 	}
-
-	
 
 	@Column(name = "detail")
 	public String getDetail() {
@@ -167,5 +225,4 @@ public class Room {
 		this.bookings = bookings;
 	}
 
-	
 }

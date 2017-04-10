@@ -25,14 +25,17 @@ public class LoginService {
 			ex.printStackTrace();
 			return null;
 		}
-		
 		try {
 			if (lst != null)
 				if (lst.get(0).getPassword().equals(password)) {
-					// System.out.println(lst.get(0).getBookings().iterator().next().getRoom().getInformation().getName()+
-					// " size booking");
 					for (Booking booking : lst.get(0).getBookings()) {
-						System.out.println("infor aaaa"+booking.getRoom().getInformation().getName());	
+						booking.getRoom().setName(booking.getRoom().getInformation().getName());
+						booking.getRoom().setHotline(booking.getRoom().getInformation().getHotline());
+						booking.getRoom().setNumber(booking.getRoom().getInformation().getNumber());
+						booking.getRoom().setWard(booking.getRoom().getInformation().getWard());
+						booking.getRoom().setStreet(booking.getRoom().getInformation().getStreet());
+						booking.getRoom().setDistrict(booking.getRoom().getInformation().getDistrict());
+						booking.getRoom().setProvince(booking.getRoom().getInformation().getProvince());
 					}
 					return lst.get(0);
 				} else
@@ -47,8 +50,7 @@ public class LoginService {
 
 	public Boolean checkEmail(String email) {
 		List<Users> lst = null;
-		
-		
+
 		Session session = null;
 		try {
 			String str = "from Users E where E.email = :email";
@@ -59,9 +61,7 @@ public class LoginService {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
-	
-		
+
 		if (lst.size() == 0)
 			return true;
 		else {

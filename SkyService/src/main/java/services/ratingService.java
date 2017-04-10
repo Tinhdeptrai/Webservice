@@ -10,9 +10,7 @@ import org.hibernate.Session;
 import entity.DetailInfor;
 import entity.Information;
 import entity.Rating;
-
 import entity.RatingId;
-import entity.Service;
 import entity.Users;
 import utils.MySessionFactory;
 

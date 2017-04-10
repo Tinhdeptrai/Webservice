@@ -79,34 +79,7 @@ public class Information {
 	public Information() {
 	}
 
-	/*
-	 * public Information(int id, Partner partner, String hotline, String name,
-	 * String timeopen, String timeclose, String type, String intro, String
-	 * number, String ward, String street, String district, String province) {
-	 * this.id = id; this.partner = partner; this.hotline = hotline; this.name =
-	 * name; this.timeopen = timeopen; this.timeclose = timeclose; this.type =
-	 * type; this.intro = intro; this.number = number; this.ward = ward;
-	 * this.street = street; this.district = district; this.province = province;
-	 * }
-	 * 
-	 * public Information(int id, Partner partner, String hotline, String name,
-	 * String timeopen, String timeclose, String type, String intro, String
-	 * number, String ward, String street, String district, String province,
-	 * String urlpartner, Set<Image> images, Set<Users> userses, Set<Service>
-	 * services, Set<Room> rooms, Set<Food> foods) { this.id = id; this.partner
-	 * = partner; this.hotline = hotline; this.name = name; this.timeopen =
-	 * timeopen; this.timeclose = timeclose; this.type = type; this.intro =
-	 * intro; this.number = number; this.ward = ward; this.street = street;
-	 * this.district = district; this.province = province; this.urlpartner =
-	 * urlpartner; this.images = images; this.userses = userses;
-	 * 
-	 * this.services = services;
-	 * 
-	 * this.rooms = rooms; this.foods = foods;
-	 * 
-	 * }
-	 */
-
+	
 	@Id
 
 	@Column(name = "id", unique = true, nullable = false)
@@ -150,58 +123,25 @@ public class Information {
 		this.name = name;
 	}
 
-	/*
-	 * @Field(index = Index.YES, analyze = Analyze.NO, store = Store.YES)
-	 * 
-	 * @DateBridge(resolution = Resolution.DAY)
-	 * 
-	 * @Temporal(TemporalType.TIME)
-	 */
-	/*@XmlElement(name = "timeopen")
-	@Column(name = "timeopen", nullable = true, length = 5)
-	public String getTimeopen() {
-		// SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
-		// try {
-		// timeopen= localDateFormat.parse(timeopen.toString());
-		// } catch (ParseException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-
-		String string = timeopen;
-		String[] parts = string.split(":");
-		String part1 = parts[0];
-		String part2 = parts[1];
-		timeopen = part1 + ":" + part2;
-		return timeopen;
-	}*/
-
 	public void setTimeopen(String timeopen) {
 		this.timeopen = timeopen;
 	}
 	@XmlElement(name = "timeopen")
 	@Column(name = "timeopen", nullable = true, length = 5)
 	public String getTimeopen() {
+		String string = timeopen;
+		String[] parts = string.split(":");
+		String part1 = parts[0];
+		String part2 = parts[1];
+		timeopen = part1 + ":" + part2;
 		return timeopen;
 	}
 
-	/*
-	 * @Field(index = Index.YES, analyze = Analyze.NO, store = Store.YES)
-	 * 
-	 * @DateBridge(resolution = Resolution.DAY)
-	 * 
-	 * @Temporal(TemporalType.TIME)
-	 */
+	
 	@XmlElement(name = "timeclose")
 	@Column(name = "timeclose", nullable = true, length = 5)
 	public String getTimeclose() {
-		// SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
-		// try {
-		// timeclose = localDateFormat.parse(timeclose.toString());
-		// } catch (ParseException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+		
 		String string = timeclose;
 		String[] parts = string.split(":");
 		String part1 = parts[0];
@@ -329,6 +269,7 @@ public class Information {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "information")
+	
 	public Set<Room> getRooms() {
 		return this.rooms;
 	}

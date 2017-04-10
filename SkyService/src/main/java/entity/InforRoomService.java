@@ -16,7 +16,7 @@ public class InforRoomService {
 	@XmlElement(name = "room")
 	private List<Room> room;
 	public InforRoomService() {
-		// TODO Auto-generated constructor stub
+	
 	}
 	public int getInfo() {
 		return info;
