@@ -49,7 +49,7 @@ public class Test {
 	public static XMLGregorianCalendar stringToXMLGregorianCalendar(String str)
 			throws ParseException, DatatypeConfigurationException {
 		Date dob = null;
-		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		df.setTimeZone(TimeZone.getTimeZone("UTC+7:00"));
 		dob = df.parse(str);
 		GregorianCalendar cal = new GregorianCalendar();
@@ -120,7 +120,7 @@ public class Test {
 
 		//Boolean res = serviceSoap.setInforCustomer("Nguyen Van Tinh", "Nguyentinh123@gmail.com", "0123456", "0122321000");
 		
-		Boolean result = serviceSoap.setBookRoom("Nguyentinh@gmail.com", "Phòng Đơn", stringToXMLGregorianCalendar("04-05-2017"),stringToXMLGregorianCalendar("05-05-2017"),1);
+		Boolean result = serviceSoap.setBookRoom("Nguyentinh@gmail.com", "Phòng đơn", stringToXMLGregorianCalendar("04-04-2017"),stringToXMLGregorianCalendar("04-04-2017"),20);
 		
 		System.out.println("thanh cong "+ result);
 		/*

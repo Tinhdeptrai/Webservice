@@ -36,8 +36,8 @@ public class BookingResource {
 		
 		System.out.println(idInfor+" infor");
 		
-		roomService.saveBookRoom(booking.getUsers(), booking.getDatein(), booking.getDateout(), booking.getRoom(),
-				booking.getQuanlity(), booking.getDetail());
+		//roomService.saveBookRoom(booking.getUsers(), booking.getDatein(), booking.getDateout(), booking.getRoom(),
+		//		booking.getQuanlity(), booking.getDetail());
 
 		
 		//if(idInfor.equals(anObject){}

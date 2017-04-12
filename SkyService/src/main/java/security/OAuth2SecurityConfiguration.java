@@ -31,29 +31,23 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-		for (Users users : lstUser) {
-		
+		for (Users users : lstUser) {	
 			auth.inMemoryAuthentication().withUser(users.getEmail()).password(users.getPassword()).roles("ADMIN");
 		}
-
 	}
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().anonymous().disable().authorizeRequests().antMatchers("/oauth/token").permitAll();
 	}
-
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-
 	@Bean
 	public TokenStore tokenStore() {
 		return new InMemoryTokenStore();
 	}
-
 	@Bean
 	@Autowired
 	public TokenStoreUserApprovalHandler userApprovalHandler(TokenStore tokenStore) {
@@ -63,7 +57,6 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		handler.setClientDetailsService(clientDetailsService);
 		return handler;
 	}
-
 	@Bean
 	@Autowired
 	public ApprovalStore approvalStore(TokenStore tokenStore) throws Exception {
