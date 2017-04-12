@@ -123,6 +123,7 @@ public interface WebServiceSoap {
     /**
      * 
      * @param dtCheckOut
+     * @param quantity
      * @param mail
      * @param dtCheckIn
      * @param loaiPhong
@@ -141,7 +142,9 @@ public interface WebServiceSoap {
         @WebParam(name = "dtCheckIn", targetNamespace = "http://tempuri.org/")
         XMLGregorianCalendar dtCheckIn,
         @WebParam(name = "dtCheckOut", targetNamespace = "http://tempuri.org/")
-        XMLGregorianCalendar dtCheckOut);
+        XMLGregorianCalendar dtCheckOut,
+        @WebParam(name = "quantity", targetNamespace = "http://tempuri.org/")
+        int quantity);
 
     /**
      * 

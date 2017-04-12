@@ -6,41 +6,50 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.TimeZone;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.google.gson.Gson;
+import org.json.JSONObject;
 
-import entity.Room;
+import entity.BookingService;
 import services.RoomService;
-import soapservice.InforReRoom;
-
-@Path("/room")
+@Path("/bookroom")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes("application/json")
-public class RoomResource {
-
+public class BookingResource {
+	
 	private RoomService roomService = new RoomService();
+	@POST
+	@Path("{idinfor}")
+	public String bookRoom(BookingService booking, @PathParam("idinfor")String idInfor) throws ParseException, DatatypeConfigurationException {
+	
+		
+		System.out.println(idInfor+" infor");
+		
+		roomService.saveBookRoom(booking.getUsers(), booking.getDatein(), booking.getDateout(), booking.getRoom(),
+				booking.getQuanlity(), booking.getDetail());
 
-	@GET
-	public List<Room> getRoom(@PathParam("InforID") int inforID) {
-		return roomService.searchRoom(inforID);
+		
+		//if(idInfor.equals(anObject){}
+		Boolean bl = roomService.bookRoomService(booking.getUsers(), booking.getRoom(),
+				stringToXMLGregorianCalendar(booking.getDatein()), stringToXMLGregorianCalendar(booking.getDateout()),booking.getQuanlity());
+
+		JSONObject object = new JSONObject();
+
+		object.put("result", String.valueOf(bl));
+		return object.toString();
 	}
 
-	
-	
 	@SuppressWarnings({ "static-access", "deprecation" })
 	public XMLGregorianCalendar stringToXMLGregorianCalendar(String str)
 			throws ParseException, DatatypeConfigurationException {
@@ -59,16 +68,4 @@ public class RoomResource {
 		return xmlDate2;
 	}
 
-	@Path("/checkroom")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String findDistricAndProvinceAndType(@QueryParam("datein") String dateIn,
-			@QueryParam("dateout") String dateOut) throws ParseException, DatatypeConfigurationException {
-		RoomService roomService = new RoomService();
-		List<InforReRoom> list = roomService.checkRoom(stringToXMLGregorianCalendar(dateIn),
-				stringToXMLGregorianCalendar(dateOut));
-		Gson gson = new Gson();
-		String str = gson.toJson(list);
-		return str;
-	}
 }

@@ -24,6 +24,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="LoaiPhong" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="dtCheckIn" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="dtCheckOut" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         &lt;element name="quantity" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,7 +38,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "mail",
     "loaiPhong",
     "dtCheckIn",
-    "dtCheckOut"
+    "dtCheckOut",
+    "quantity"
 })
 @XmlRootElement(name = "setBookRoom")
 public class SetBookRoom {
@@ -51,6 +53,7 @@ public class SetBookRoom {
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dtCheckOut;
+    protected int quantity;
 
     /**
      * Gets the value of the mail property.
@@ -146,6 +149,22 @@ public class SetBookRoom {
      */
     public void setDtCheckOut(XMLGregorianCalendar value) {
         this.dtCheckOut = value;
+    }
+
+    /**
+     * Gets the value of the quantity property.
+     * 
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * Sets the value of the quantity property.
+     * 
+     */
+    public void setQuantity(int value) {
+        this.quantity = value;
     }
 
 }

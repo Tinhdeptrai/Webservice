@@ -1,11 +1,5 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import entity.Service;
-import services.ratingService;
-
 public class getlistservice {
 public static void main(String[] args) {
 	

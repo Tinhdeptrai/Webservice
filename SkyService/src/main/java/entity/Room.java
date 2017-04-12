@@ -55,7 +55,7 @@ public class Room {
 	private String province;
 
 	
-	
+	@Column(name = "hotline")
 	public String getHotline() {
 		return hotline;
 	}
@@ -63,7 +63,7 @@ public class Room {
 	public void setHotline(String hotline) {
 		this.hotline = hotline;
 	}
-
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -71,7 +71,7 @@ public class Room {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	@Column(name = "number")
 	public String getNumber() {
 		return number;
 	}
@@ -79,7 +79,7 @@ public class Room {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-
+	@Column(name = "ward")
 	public String getWard() {
 		return ward;
 	}
@@ -87,7 +87,7 @@ public class Room {
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
-
+	@Column(name = "street")
 	public String getStreet() {
 		return street;
 	}
@@ -95,7 +95,7 @@ public class Room {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-
+	@Column(name = "district")
 	public String getDistrict() {
 		return district;
 	}
@@ -103,7 +103,7 @@ public class Room {
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-
+	@Column(name = "province")
 	public String getProvince() {
 		return province;
 	}

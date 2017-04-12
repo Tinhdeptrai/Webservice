@@ -24,6 +24,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="ROOM" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="CHECKIN" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="CHECKOUT" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         &lt;element name="QUANTITY" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="CUSTOMER1" type="{http://tempuri.org/}CUSTOMER" minOccurs="0"/>
  *         &lt;element name="GROUPROOM" type="{http://tempuri.org/}GROUPROOM" minOccurs="0"/>
  *       &lt;/sequence>
@@ -41,6 +42,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "room",
     "checkin",
     "checkout",
+    "quantity",
     "customer1",
     "grouproom"
 })
@@ -58,6 +60,8 @@ public class BOOKROOM {
     @XmlElement(name = "CHECKOUT", required = true, nillable = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar checkout;
+    @XmlElement(name = "QUANTITY")
+    protected int quantity;
     @XmlElement(name = "CUSTOMER1")
     protected CUSTOMER customer1;
     @XmlElement(name = "GROUPROOM")
@@ -157,6 +161,22 @@ public class BOOKROOM {
      */
     public void setCHECKOUT(XMLGregorianCalendar value) {
         this.checkout = value;
+    }
+
+    /**
+     * Gets the value of the quantity property.
+     * 
+     */
+    public int getQUANTITY() {
+        return quantity;
+    }
+
+    /**
+     * Sets the value of the quantity property.
+     * 
+     */
+    public void setQUANTITY(int value) {
+        this.quantity = value;
     }
 
     /**

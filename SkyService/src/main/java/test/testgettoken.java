@@ -15,7 +15,6 @@ import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-
 import entity.AuthTokenInfo;
 import entity.BookingService;
 
@@ -89,7 +88,7 @@ public class testgettoken {
 			Client client = Client.create();
 			WebResource webResource = client.resource(
 					"http://localhost:8080/SkyService/rest/bookroom" + QPM_ACCESS_TOKEN + authTokenInfo.getAccess_token());
-			System.out.println("http://localhost:8080/SkyService/rest/room/bookroom" + QPM_ACCESS_TOKEN + authTokenInfo.getAccess_token());
+			System.out.println("http://localhost:8080/SkyService/rest/bookroom/15" + QPM_ACCESS_TOKEN + authTokenInfo.getAccess_token());
 			Gson gson = new Gson();
 
 			BookingService bookingService = new BookingService();

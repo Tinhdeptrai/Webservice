@@ -21,12 +21,6 @@
 		<property name="hibernate.connection.CharSet">utf8</property>
 		<property name="hibernate.connection.characterEncoding">utf8</property>
 		<property name="hibernate.connection.useUnicode">true</property>
-
-
-		<!-- <property name="hibernate.search.default.directory_provider">filesystem</property>
-
-		<property name="hibernate.search.default.indexBase">F:/HuongDichVu/Webservice.git/trunk/SkyService/indexes"</property>
- -->
 		<mapping class="entity.Information" />
 		<mapping class="entity.Image" />
 		<mapping class="entity.Food" />

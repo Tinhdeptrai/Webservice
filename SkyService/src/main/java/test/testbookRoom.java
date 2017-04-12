@@ -12,7 +12,7 @@ public class testbookRoom {
 		try {
 
 			Client client = Client.create();
-			WebResource webResource = client.resource("http://localhost:8080/SkyService/rest/infor/25/room/bookroom");
+			WebResource webResource = client.resource("http://localhost:8080/SkyService/rest/bookroom/15");
 			Gson gson = new Gson();
 
 

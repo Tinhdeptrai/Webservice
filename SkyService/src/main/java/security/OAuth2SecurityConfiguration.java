@@ -32,6 +32,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
 		for (Users users : lstUser) {
+		
 			auth.inMemoryAuthentication().withUser(users.getEmail()).password(users.getPassword()).roles("ADMIN");
 		}
 
