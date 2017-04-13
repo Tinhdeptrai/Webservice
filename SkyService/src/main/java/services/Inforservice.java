@@ -138,7 +138,7 @@ public class Inforservice {
 		try {
 			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
 					+ "as price " + "from Information e where e.partner = " + partner + " and e.province like :province"
-					+ " and (e.district = :distric)";
+					+ " and (e.district like :distric)";
 			// String str = "select COUNT(*) from Rating r where
 			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
@@ -263,7 +263,7 @@ public class Inforservice {
 		try {
 			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
 					+ "as price " + "from Information e where e.partner = " + partner
-					+ " and (e.province like :province) and (e.type like :type) and (e.district = :district)";
+					+ " and (e.province like :province) and (e.type like :type) and (e.district like :district)";
 			// String str = "select COUNT(*) from Rating r where
 			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
@@ -546,7 +546,7 @@ public class Inforservice {
 		}
 		try {
 			String str = "select e,(select COUNT(*) from Rating r where r.information.id = e.id)as rating," + temp
-					+ "as price " + "from Information e where e.partner = " + partner + " and e.province = :name";
+					+ "as price " + "from Information e where e.partner = " + partner + " and e.province like :name";
 			// String str = "select COUNT(*) from Rating r where
 			// r.information.id = 5";
 			Session session = MySessionFactory.getSessionFactory().openSession();
