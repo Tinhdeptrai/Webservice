@@ -23,7 +23,7 @@ public class testgettoken {
 
 	public static final String AUTH_SERVER_URI = "http://localhost:8080/SkyService/oauth/token";
 
-	public static final String QPM_PASSWORD_GRANT = "?grant_type=password&username=nguyentinh0410@gmail.com&password=123";
+	public static final String QPM_PASSWORD_GRANT = "?grant_type=password&username=nguyentinh0410@gmail.com&password=73c18c59a39b18382081ec00bb456d43";
 
 	public static final String QPM_ACCESS_TOKEN = "?access_token=";
 

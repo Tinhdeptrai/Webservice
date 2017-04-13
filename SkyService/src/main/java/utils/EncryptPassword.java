@@ -30,5 +30,5 @@ public class EncryptPassword {
 	}
 
 	public static void main(String[] args) {
-System.out.println(encryptMD5("123456"));	}
+System.out.println(encryptMD5("gg"));	}
 }

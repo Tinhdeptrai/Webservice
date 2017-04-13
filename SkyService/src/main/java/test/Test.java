@@ -120,7 +120,7 @@ public class Test {
 
 		//Boolean res = serviceSoap.setInforCustomer("Nguyen Van Tinh", "Nguyentinh123@gmail.com", "0123456", "0122321000");
 		
-		Boolean result = serviceSoap.setBookRoom("Nguyentinh@gmail.com", "Phòng đơn", stringToXMLGregorianCalendar("04-04-2017"),stringToXMLGregorianCalendar("04-04-2017"),20);
+		Boolean result = serviceSoap.setBookRoom("tranthucuyen0508@gmail.com", "Phòng tập thể", stringToXMLGregorianCalendar("04-21-2017"),stringToXMLGregorianCalendar("04-25-2017"),2);
 		
 		System.out.println("thanh cong "+ result);
 		/*

@@ -23,30 +23,42 @@ import org.json.JSONObject;
 
 import entity.BookingService;
 import services.RoomService;
+
 @Path("/bookroom")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes("application/json")
 public class BookingResource {
-	
+
 	private RoomService roomService = new RoomService();
+	public String formatDay(String day) {
+		
+		String[] parts = day.split("-");
+		String part1 = parts[0];
+		String part2 = parts[1];
+		String part3 = parts[2];
+		return part2+part1+part3;
+	}
+
 	@POST
 	@Path("{idinfor}")
-	public String bookRoom(BookingService booking, @PathParam("idinfor")String idInfor) throws ParseException, DatatypeConfigurationException {
-	
-		
-		System.out.println(idInfor+" infor");
-		
-		//roomService.saveBookRoom(booking.getUsers(), booking.getDatein(), booking.getDateout(), booking.getRoom(),
-		//		booking.getQuanlity(), booking.getDetail());
+	public String bookRoom(BookingService booking, @PathParam("idinfor") String idInfor)
+			throws ParseException, DatatypeConfigurationException {
 
-		
-		//if(idInfor.equals(anObject){}
-		Boolean bl = roomService.bookRoomService(booking.getUsers(), booking.getRoom(),
-				stringToXMLGregorianCalendar(booking.getDatein()), stringToXMLGregorianCalendar(booking.getDateout()),booking.getQuanlity());
+		System.out.println(idInfor + " infor");
 
+		roomService.saveBookRoom(booking.getUsers(), formatDay(booking.getDatein()), (booking.getDateout()), booking.getRoom(),
+				booking.getQuanlity(), booking.getDetail());
+
+		int id = Integer.parseInt(idInfor);
 		JSONObject object = new JSONObject();
+		if (id == 97) {
+			Boolean bl = roomService.bookRoomService(booking.getUsers(), booking.getRoom(),
+					stringToXMLGregorianCalendar(booking.getDatein()),
+					stringToXMLGregorianCalendar(booking.getDateout()), booking.getQuanlity());
 
-		object.put("result", String.valueOf(bl));
+			object.put("result", String.valueOf(bl));
+		} else
+			object.put("result", true);
 		return object.toString();
 	}
 
@@ -64,7 +76,7 @@ public class BookingResource {
 						cal.get(Calendar.DAY_OF_MONTH), dob.getHours(), dob.getMinutes(), dob.getSeconds(),
 						DatatypeConstants.FIELD_UNDEFINED, cal.getTimeZone().LONG)
 				.normalize();
-		System.out.println("ngay "+xmlDate2);
+		System.out.println("ngay " + xmlDate2);
 		return xmlDate2;
 	}
 

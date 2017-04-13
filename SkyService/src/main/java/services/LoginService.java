@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import entity.Booking;
 import entity.Users;
+import utils.EncryptPassword;
 import utils.MySessionFactory;
 
 @SuppressWarnings("unchecked")
@@ -27,8 +28,8 @@ public class LoginService {
 		}
 		try {
 			if (lst != null) {
-				//String passwordEncry = EncryptPassword.encryptMD5(password);
-				if (lst.get(0).getPassword().equals(password)) {
+				String passwordEncry = EncryptPassword.encryptMD5(password);
+				if (lst.get(0).getPassword().equals(passwordEncry)) {
 					for (Booking booking : lst.get(0).getBookings()) {
 						booking.getRoom().setName(booking.getRoom().getInformation().getName());
 						booking.getRoom().setHotline(booking.getRoom().getInformation().getHotline());
@@ -77,8 +78,8 @@ public class LoginService {
 			Users user = new Users();
 			user.setEmail(users.getEmail());
 			user.setFullname(users.getFullname());
-			//String passwordEncry = EncryptPassword.encryptMD5(users.getPassword());
-			user.setPassword(users.getPassword());
+			String passwordEncry = EncryptPassword.encryptMD5(users.getPassword());
+			user.setPassword(passwordEncry);
 			user.setPhone(users.getPhone());
 			user.setPoint(users.getPoint());
 			session = MySessionFactory.getSessionFactory().openSession();
